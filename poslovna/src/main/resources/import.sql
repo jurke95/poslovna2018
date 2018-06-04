@@ -1,0 +1,1 @@
+INSERT INTO `poslovna`.`country` (`code`, `name`) VALUES ('232','Serbia');
