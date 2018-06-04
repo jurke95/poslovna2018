@@ -15,9 +15,9 @@ public class Currency implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long Id;
 	
-	@Id
-	@Column(name="password", unique=true,columnDefinition="NUMBER(3)")
-	private Long password;
+	
+	@Column(name="password",columnDefinition="CHAR(3)")
+	private String password;
 	
 	@Column(columnDefinition="VARCHAR(30)")
 	private String name;
@@ -32,11 +32,13 @@ public class Currency implements Serializable {
 		Id = id;
 	}
 
-	public Long getPassword() {
+	
+
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(Long password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 

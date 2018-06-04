@@ -18,8 +18,8 @@ public class ExchangeRate implements Serializable {
 	
 	private Date date;
 	
-	@Column(columnDefinition="NUMBER(3)")
-	private Long numberExchangeRate;
+	@Column(columnDefinition="CHAR(3)")
+	private String numberExchangeRate;
 	
 	private Date startsOn;
 
@@ -41,11 +41,13 @@ public class ExchangeRate implements Serializable {
 
 	
 
-	public Long getNumberExchangeRate() {
+	
+
+	public String getNumberExchangeRate() {
 		return numberExchangeRate;
 	}
 
-	public void setNumberExchangeRate(Long numberExchangeRate) {
+	public void setNumberExchangeRate(String numberExchangeRate) {
 		this.numberExchangeRate = numberExchangeRate;
 	}
 
