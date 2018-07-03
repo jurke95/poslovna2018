@@ -29,8 +29,7 @@ public class ExchangeRate implements Serializable {
 	@JoinColumn(name="bank_id")
 	private Bank bank;
 	
-	
-	
+
 
 	
 	public ExchangeRate(String date, String numberExchangeRate, String startsOn, Bank bank) {
@@ -83,6 +82,8 @@ public class ExchangeRate implements Serializable {
 	public void setBank(Bank bank) {
 		this.bank = bank;
 	}
+
+	
 
 	
 	

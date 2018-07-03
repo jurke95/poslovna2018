@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Currency implements Serializable {
@@ -23,6 +25,21 @@ public class Currency implements Serializable {
 	private String name;
 	
 	private Boolean domicile;
+	
+	@ManyToOne
+	@JoinColumn(name="country_id")
+	private Country country;
+	
+	
+	
+
+	public Currency(String password, String name, Boolean domicile, Country country) {
+		super();
+		this.password = password;
+		this.name = name;
+		this.domicile = domicile;
+		this.country = country;
+	}
 
 	public Long getId() {
 		return Id;
@@ -56,6 +73,14 @@ public class Currency implements Serializable {
 
 	public void setDomicile(Boolean domicile) {
 		this.domicile = domicile;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 	
 	

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class RateInCurrency implements Serializable {
@@ -22,6 +23,26 @@ public class RateInCurrency implements Serializable {
 	
 	@Column(columnDefinition="Decimal(9,4)")
 	private Long selling;
+	
+	
+	@ManyToOne
+	private Currency primary;
+	
+	@ManyToOne
+	private Currency changeto;
+	
+	
+	
+	
+
+	public RateInCurrency(Long buying, Long average, Long selling, Currency primary, Currency changeto) {
+		super();
+		this.buying = buying;
+		this.average = average;
+		this.selling = selling;
+		this.primary = primary;
+		this.changeto = changeto;
+	}
 
 	public Long getId() {
 		return Id;
@@ -55,6 +76,22 @@ public class RateInCurrency implements Serializable {
 
 	public void setSelling(Long selling) {
 		this.selling = selling;
+	}
+
+	public Currency getPrimary() {
+		return primary;
+	}
+
+	public void setPrimary(Currency primary) {
+		this.primary = primary;
+	}
+
+	public Currency getChangeto() {
+		return changeto;
+	}
+
+	public void setChangeto(Currency changeto) {
+		this.changeto = changeto;
 	}
 
 	

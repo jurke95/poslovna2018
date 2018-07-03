@@ -1,5 +1,9 @@
 package com.poslovna.repository;
 
-public class ExchangeRateRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.poslovna.model.ExchangeRate;
+
+public interface ExchangeRateRepository extends JpaRepository<ExchangeRate,Long> {
 
 }
