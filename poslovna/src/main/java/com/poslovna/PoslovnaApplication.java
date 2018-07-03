@@ -10,3 +10,4 @@ public class PoslovnaApplication {
 		SpringApplication.run(PoslovnaApplication.class, args);
 	}
 }
+//comment
