@@ -39,6 +39,8 @@ public class Account implements Serializable {
 	@ManyToOne
 	private Individual individual;
 	
+	@ManyToOne  
+	private LegalEntity legalEntity;
 	
 	public Long getId() {
 		return id;
@@ -94,6 +96,14 @@ public class Account implements Serializable {
 
 	public void setIndividual(Individual individual) {
 		this.individual = individual;
+	}
+
+	public LegalEntity getLegalEntity() {
+		return legalEntity;
+	}
+
+	public void setLegalEntity(LegalEntity legalEntity) {
+		this.legalEntity = legalEntity;
 	}
 	
 	

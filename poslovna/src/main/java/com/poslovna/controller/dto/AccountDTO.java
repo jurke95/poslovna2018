@@ -24,6 +24,8 @@ public class AccountDTO {
 	
 	private Long individualid;
 	
+	private Long legalEntityid;
+	
 	private Long bankid;
 
 	public Long getId() {
@@ -80,6 +82,14 @@ public class AccountDTO {
 
 	public void setBankid(Long bankid) {
 		this.bankid = bankid;
+	}
+
+	public Long getLegalEntityid() {
+		return legalEntityid;
+	}
+
+	public void setLegalEntityid(Long legalEntityid) {
+		this.legalEntityid = legalEntityid;
 	}
 
 
