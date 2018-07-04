@@ -14,6 +14,7 @@ import com.poslovna.repository.AccountRepository;
 import com.poslovna.repository.BankRepository;
 import com.poslovna.repository.CurrencyRepository;
 import com.poslovna.repository.IndividualRepositroy;
+import com.poslovna.repository.LegalEntityRepository;
 
 @Service
 public class AccountService {
@@ -29,6 +30,9 @@ public class AccountService {
 	
 	@Autowired
 	private IndividualRepositroy individualRepositroy;
+	
+	@Autowired
+	private LegalEntityRepository legalEntityRepository;
 	
 	public Account getAccount(Long id) {
 		return accountRepository.findOneById(id);
@@ -57,6 +61,23 @@ public class AccountService {
 		return account;
 	}
 	
+	
+	public Account addLegalAccount(AccountDTO accountdto) {
+		
+		Account account = new Account();
+		if(accountdto!=null) {
+			account.setAccountnum(accountdto.getAccountnum());
+			account.setBank(bankRepository.findByIdEquals(accountdto.getBankid()));
+			account.setCurrency(currencyRepository.findOneById(accountdto.getCurrencyid()));
+			account.setIndividual(null);
+			account.setLegalEntity(legalEntityRepository.findByIdEquals(accountdto.getLegalEntityid()));
+			account.setIsValid(true);
+			Date date = new Date();
+			account.setOpeningdate(date);
+			accountRepository.save(account);
+		}
+		return account;
+	}
 	
 	public List<Account> getAllIndividualAccount(){
 		
