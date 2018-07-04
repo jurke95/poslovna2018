@@ -8,10 +8,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Account implements Serializable {
 	
+	
+	public Account() {
+		
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -21,17 +26,26 @@ public class Account implements Serializable {
 	@Column(columnDefinition="VARCHAR(18)")
 	private String accountnum;
 	
-	
 	private Date openingdate;
 	
 	private Boolean isValid;
 
+	@ManyToOne
+	private Bank bank;
+	
+	@ManyToOne
+	private Currency currency;
+	
+	@ManyToOne
+	private Individual individual;
+	
+	
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
-		id = id;
+		this.id = id;
 	}
 
 	public String getAccountnum() {
@@ -56,6 +70,30 @@ public class Account implements Serializable {
 
 	public void setIsValid(Boolean isValid) {
 		this.isValid = isValid;
+	}
+
+	public Bank getBank() {
+		return bank;
+	}
+
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
+	public Individual getIndividual() {
+		return individual;
+	}
+
+	public void setIndividual(Individual individual) {
+		this.individual = individual;
 	}
 	
 	
