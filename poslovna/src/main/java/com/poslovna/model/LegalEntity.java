@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class LegalEntity {
@@ -15,8 +16,8 @@ public class LegalEntity {
 	
 	
 	public LegalEntity(Long id, String name, String shortName, String location, String address, String phoneNumber,
-			String fax, String email, String responsiblePerson, String activityName, String activityCode, String mbr,
-			String jmbg, String taxAuthority, String taxNumber, String deliveryAddress) {
+			String fax, String email, String responsiblePerson, Activity activity, String mbr, String jmbg,
+			String taxAuthority, String taxNumber, String deliveryAddress) {
 		
 		this.id = id;
 		this.name = name;
@@ -27,14 +28,17 @@ public class LegalEntity {
 		this.fax = fax;
 		this.email = email;
 		this.responsiblePerson = responsiblePerson;
-		this.activityName = activityName;
-		this.activityCode = activityCode;
+		this.activity = activity;
 		this.mbr = mbr;
 		this.jmbg = jmbg;
 		this.taxAuthority = taxAuthority;
 		this.taxNumber = taxNumber;
 		this.deliveryAddress = deliveryAddress;
 	}
+
+	
+	
+	
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -64,11 +68,9 @@ public class LegalEntity {
 	@Column
 	private String responsiblePerson;
 	
-	@Column
-	private String activityName;
 	
-	@Column
-	private String activityCode;
+	@OneToOne
+	private Activity activity;
 	
 	@Column
 	private String mbr;
@@ -162,21 +164,7 @@ public class LegalEntity {
 		this.responsiblePerson = responsiblePerson;
 	}
 
-	public String getActivityName() {
-		return activityName;
-	}
-
-	public void setActivityName(String activityName) {
-		this.activityName = activityName;
-	}
-
-	public String getActivityCode() {
-		return activityCode;
-	}
-
-	public void setActivityCode(String activityCode) {
-		this.activityCode = activityCode;
-	}
+	
 
 	public String getMbr() {
 		return mbr;
