@@ -1,4 +1,4 @@
-package com.poslovna.dto;
+package com.poslovna.controller.dto;
 
 public class CityDTO {
 	

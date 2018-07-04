@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.poslovna.dto.CityDTO;
+import com.poslovna.controller.dto.CityDTO;
 import com.poslovna.model.City;
 import com.poslovna.model.Country;
 import com.poslovna.repository.CityRepository;
@@ -47,6 +47,33 @@ public class CityService {
 		cityReposiotry.save(c);
 		
 		return c;
+		
+	}
+	
+	
+	public City editCity(Long id, CityDTO city) {
+		
+		City c = cityReposiotry.findByIdEquals(id);
+		
+		c.setName(city.getName());
+		c.setCode(city.getCode());
+		c.setPostNum(city.getPostNum());
+		
+		Country country = countryRepository.findByNameEquals(city.getCountry());
+		c.setCountry(country);
+		
+		cityReposiotry.save(c);
+		
+		return c;
+	}
+	
+	public City deleteCity(Long id) {
+		
+		City city = cityReposiotry.findByIdEquals(id);
+		
+		cityReposiotry.delete(city);
+		
+		return city;
 		
 	}
 	
