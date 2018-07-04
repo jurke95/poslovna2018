@@ -14,7 +14,7 @@ public class Country implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 	
 	@Column(columnDefinition="VARCHAR(40)")
@@ -24,11 +24,11 @@ public class Country implements Serializable {
 	private String code;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getName() {
