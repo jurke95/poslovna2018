@@ -1,5 +1,7 @@
 package com.poslovna.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,26 @@ public class LegalEntityService {
 	
 	public LegalEntity addLegalEntity(LegalEntity legalEnt) {
 		
-		return legalEntRepository.save(legalEnt);
+		LegalEntity le = legalEntRepository.save(legalEnt);
+		
+		return le;		
 	}
 
+	
+	public LegalEntity deleteLegalEntity(Long id) {
+		
+		LegalEntity legalEnt = legalEntRepository.findByIdEquals(id);
+		
+		legalEntRepository.delete(legalEnt);
+		
+		return legalEnt;
+		
+	}
+	
+	public List<LegalEntity> findAllLenEnt(){
+		
+		List<LegalEntity> legEntities = legalEntRepository.findAll();
+		
+		return legEntities;
+	}
 }

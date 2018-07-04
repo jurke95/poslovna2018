@@ -7,5 +7,7 @@ import com.poslovna.model.LegalEntity;
 
 @Repository
 public interface LegalEntityRepository extends JpaRepository<LegalEntity, Long>{
+	
+	LegalEntity findByIdEquals(Long id);
 
 }
