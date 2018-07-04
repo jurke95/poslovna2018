@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 public class RateInCurrency implements Serializable {
 	
 	@Id
-	private Long Id;
+	private Long id;
 	
 	@Column(columnDefinition="Decimal(9,4)")
 	private Long buying;
@@ -45,11 +45,11 @@ public class RateInCurrency implements Serializable {
 	}
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
 
 	

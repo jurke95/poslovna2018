@@ -13,7 +13,7 @@ public class InhabitedPlace implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 	@Column(columnDefinition="VARCHAR(60)")
 	private String name;
@@ -22,11 +22,11 @@ public class InhabitedPlace implements Serializable{
 	private String PTTCode;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getName() {

@@ -15,7 +15,7 @@ public class Bank implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 	@NotNull
 	@Column(columnDefinition="CHAR(3)")
@@ -48,11 +48,11 @@ public class Bank implements Serializable {
 	private Boolean bank;       // ?????
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getCode() {

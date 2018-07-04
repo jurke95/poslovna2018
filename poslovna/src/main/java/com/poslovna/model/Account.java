@@ -15,7 +15,7 @@ public class Account implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 
 	@Column(columnDefinition="VARCHAR(18)")
@@ -27,11 +27,11 @@ public class Account implements Serializable {
 	private Boolean isValid;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getAccountnum() {

@@ -14,7 +14,7 @@ public class TypesOfPayments implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 	@Column(columnDefinition="VARCHAR(3)") //Ovo treba da bude sifra sa tri broja...ne treba ID
 	private String Code;
@@ -23,11 +23,11 @@ public class TypesOfPayments implements Serializable{
 	private String nameOfCurrency;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getCode() {

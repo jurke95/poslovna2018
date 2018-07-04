@@ -14,7 +14,7 @@ public class StatementAnalysis implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 	private Long itemNumber; //ovo bi trebao da bude kljuc
 	
@@ -55,11 +55,11 @@ public class StatementAnalysis implements Serializable{
 	private Boolean status;
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		id = id;
 	}
 
 	public Long getItemNumber() {
