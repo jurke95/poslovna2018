@@ -8,43 +8,68 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class AccountClosure implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long Id;
+	private Long id;
 	
 	
-	private Date closuredate;
+	private String closuredate;
 	
-	@Column(columnDefinition="VARCHAR(20)")
-	private String newaccount;
+	@ManyToOne
+	@JoinColumn(name="accountto")
+	private Account accountto;
+	
+	@ManyToOne
+	@JoinColumn(name="accountfrom")
+	private Account accountfrom;
+	
+	
+
+	
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
-	public Date getClosuredate() {
+	
+	
+	public String getClosuredate() {
 		return closuredate;
 	}
 
-	public void setClosuredate(Date closuredate) {
+	public void setClosuredate(String closuredate) {
 		this.closuredate = closuredate;
 	}
 
-	public String getNewaccount() {
-		return newaccount;
+	public Account getAccountto() {
+		return accountto;
 	}
 
-	public void setNewaccount(String newaccount) {
-		this.newaccount = newaccount;
+	public void setAccountto(Account accountto) {
+		this.accountto = accountto;
 	}
+
+	public Account getAccountfrom() {
+		return accountfrom;
+	}
+
+	public void setAccountfrom(Account accountfrom) {
+		this.accountfrom = accountfrom;
+	}
+
+	
+
+	
 	
 	
 	
