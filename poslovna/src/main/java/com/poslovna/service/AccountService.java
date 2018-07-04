@@ -1,6 +1,8 @@
 package com.poslovna.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,6 +48,7 @@ public class AccountService {
 			account.setBank(bankRepository.findByIdEquals(accountdto.getBankid()));
 			account.setCurrency(currencyRepository.findOneById(accountdto.getCurrencyid()));
 			account.setIndividual(individualRepositroy.findByIdEquals(accountdto.getIndividualid()));
+			account.setLegalEntity(null);
 			account.setIsValid(true);
 			Date date = new Date();
 			account.setOpeningdate(date);
@@ -53,5 +56,51 @@ public class AccountService {
 		}
 		return account;
 	}
+	
+	
+	public List<Account> getAllIndividualAccount(){
+		
+		List<Account> listAccoount = accountRepository.findAll();
+		List<Account> retList = new ArrayList<>();
+		for(Account acc : listAccoount) {
+			if(acc.getLegalEntity()==null) {
+				retList.add(acc);
+			}
+		}
+		
+		return retList;
+	}
+	
+	
+	public List<Account> getAllIndividualAccountOfBank(Long id){
+		
+		List<Account> listAccoount = accountRepository.findAll();
+		List<Account> retList = new ArrayList<>();
+		for(Account acc : listAccoount) {
+			if(acc.getBank().getId()==id) {
+				retList.add(acc);
+			}
+		}
+		
+		return retList;
+	}
+	
+	
+	public List<Account> getAllIndividualAccount(Long idindividual,Long idbank){
+		
+		List<Account> listAccoount = accountRepository.findAll();
+		List<Account> retList = new ArrayList<>();
+		for(Account acc : listAccoount) {
+			if(acc.getIndividual()!=null) {
+				if(acc.getIndividual().getId()==idindividual && acc.getBank().getId()==idbank) {
+					retList.add(acc);
+				}
+			}
+			
+		}
+		
+		return retList;
+	}
+	
 	
 }
