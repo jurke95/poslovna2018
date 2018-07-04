@@ -30,7 +30,9 @@ public class Currency implements Serializable {
 	@JoinColumn(name="country_id")
 	private Country country;
 	
-	
+	public Currency(){
+		
+	}
 	
 
 	public Currency(String password, String name, Boolean domicile, Country country) {
