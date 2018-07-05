@@ -84,7 +84,7 @@ public class AccountService {
 		List<Account> listAccoount = accountRepository.findAll();
 		List<Account> retList = new ArrayList<>();
 		for(Account acc : listAccoount) {
-			if(acc.getLegalEntity()==null) {
+			if(acc.getLegalEntity()==null && acc.getIndividual()!=null) {
 				retList.add(acc);
 			}
 		}
@@ -93,12 +93,38 @@ public class AccountService {
 	}
 	
 	
+	public List<Account> getAllLegallAccount(){
+		
+		List<Account> listAccoount = accountRepository.findAll();
+		List<Account> retList = new ArrayList<>();
+		for(Account acc : listAccoount) {
+			if(acc.getIndividual()==null && acc.getLegalEntity()!=null) {
+				retList.add(acc);
+			}
+		}
+		
+		return retList;
+	}
+	
 	public List<Account> getAllIndividualAccountOfBank(Long id){
 		
 		List<Account> listAccoount = accountRepository.findAll();
 		List<Account> retList = new ArrayList<>();
 		for(Account acc : listAccoount) {
-			if(acc.getBank().getId()==id) {
+			if(acc.getBank().getId()==id && acc.getIndividual()!=null) {
+				retList.add(acc);
+			}
+		}
+		
+		return retList;
+	}
+	
+	public List<Account> getAllLegalAccountOfBank(Long id){
+		
+		List<Account> listAccoount = accountRepository.findAll();
+		List<Account> retList = new ArrayList<>();
+		for(Account acc : listAccoount) {
+			if(acc.getBank().getId()==id && acc.getLegalEntity()!=null) {
 				retList.add(acc);
 			}
 		}
@@ -114,6 +140,22 @@ public class AccountService {
 		for(Account acc : listAccoount) {
 			if(acc.getIndividual()!=null) {
 				if(acc.getIndividual().getId()==idindividual && acc.getBank().getId()==idbank) {
+					retList.add(acc);
+				}
+			}
+			
+		}
+		
+		return retList;
+	}
+	
+	public List<Account> getAllLegalAccount(Long idlegal,Long idbank){
+		
+		List<Account> listAccoount = accountRepository.findAll();
+		List<Account> retList = new ArrayList<>();
+		for(Account acc : listAccoount) {
+			if(acc.getLegalEntity()!=null) {
+				if(acc.getLegalEntity().getId()==idlegal && acc.getBank().getId()==idbank) {
 					retList.add(acc);
 				}
 			}

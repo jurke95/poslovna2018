@@ -26,7 +26,11 @@ public class AccountController {
 	@Autowired
 	private AccountService accountService;
 	
-	
+	/**
+	 * Add account of the individual
+	 * @param accountdto
+	 * @return
+	 */
 	@PostMapping("/addindividualaccount")
 	public ResponseEntity<String> addindividualaccount(@RequestBody AccountDTO accountdto){
 		
@@ -40,7 +44,31 @@ public class AccountController {
 	}
 	
 	
+	/**
+	 * Add account of the legal entity
+	 * @param accountdto
+	 * @return
+	 */
+	@PostMapping("/addlegalaccount")
+	public ResponseEntity<String> addlegalaccount(@RequestBody AccountDTO accountdto){
+		
+		Account account = accountService.addLegalAccount(accountdto);
+		
+		if(account!=null) {
+			return new ResponseEntity<>("successful",HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>("unsuccessful",HttpStatus.NOT_FOUND);
+	}
 	
+	
+	
+	
+	
+	/**
+	 * Get all individual account
+	 * @return
+	 */
 	@GetMapping("/getAllIndividualAccount")
 	public ResponseEntity<List<Account>> getAllIndividualAccount(){
 		
@@ -53,6 +81,29 @@ public class AccountController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	
+	/**
+	 * Get all legal account
+	 * @return
+	 */
+	@GetMapping("/getAllLegalAccount")
+	public ResponseEntity<List<Account>> getAllLegalAccount(){
+		
+		List<Account> ListAccount = accountService.getAllLegallAccount();
+		
+		if(ListAccount!=null) {
+			return new ResponseEntity<>(ListAccount,HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
+	/**
+	 * Get all individual accounts of the bank
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/getIndividualAccountsOfBank/{id}")
 	public ResponseEntity<List<Account>> getIndividualAccountsOfBank(@PathVariable Long id){
 		
@@ -66,10 +117,52 @@ public class AccountController {
 	}
 	
 	
+	/**
+	 * Get all legal accounts of the bank
+	 * @param id
+	 * @return
+	 */
+	@GetMapping("/getLegalAccountsOfBank/{id}")
+	public ResponseEntity<List<Account>> getLegalAccountsOfBank(@PathVariable Long id){
+		
+		List<Account> ListAccount = accountService.getAllLegalAccountOfBank(id);
+		
+		if(ListAccount!=null) {
+			return new ResponseEntity<>(ListAccount,HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
+	/**
+	 * Get all account of individual from the bank
+	 * @param idIndividual
+	 * @param idbank
+	 * @return
+	 */
 	@GetMapping("/getIndividualAccount/{idIndividual}/{idbank}")
 	public ResponseEntity<List<Account>> getIndividualAccount(@PathVariable Long idIndividual,@PathVariable Long idbank){
 		
 		List<Account> ListAccount = accountService.getAllIndividualAccount(idIndividual,idbank);
+		
+		if(ListAccount!=null) {
+			return new ResponseEntity<>(ListAccount,HttpStatus.OK);
+		}
+		
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	/**
+	 * Get account of legal entity from the bank
+	 * @param idLegal
+	 * @param idbank
+	 * @return
+	 */
+	@GetMapping("/getLegalAccount/{idLegal}/{idbank}")
+	public ResponseEntity<List<Account>> getLegalAccount(@PathVariable Long idLegal,@PathVariable Long idbank){
+		
+		List<Account> ListAccount = accountService.getAllLegalAccount(idLegal,idbank);
 		
 		if(ListAccount!=null) {
 			return new ResponseEntity<>(ListAccount,HttpStatus.OK);
