@@ -12,6 +12,17 @@ import javax.persistence.Id;
 public class TypesOfPayments implements Serializable{
 	
 	
+	public TypesOfPayments() {
+		
+	}
+	
+	public TypesOfPayments(Long id, String code, String nameOfCurrency) {
+	
+		this.id = id;
+		Code = code;
+		this.nameOfCurrency = nameOfCurrency;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;

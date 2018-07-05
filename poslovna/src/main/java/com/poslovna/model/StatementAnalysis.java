@@ -8,66 +8,154 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name = "statementAnalysis")
 public class StatementAnalysis implements Serializable{
 	
+	public StatementAnalysis() {
+		
+	}
+	
+	public StatementAnalysis(Long id, String type, String debtorOrderer, String purposeOfPayment,
+			String creditorReceiver, String dateOfReceipt, String dateCurrency, Double amount, String debtorAccountXML,
+			Integer modelOfIndebtedness, String referenceNumberOfIndebtedness, Boolean urgent, Integer typeOfError,
+			String status, String paymentTypeXML, String paymentCurrencyXML, String cityXML, Account debtorAccount,
+			String accountCreditorXML, Account accountCreditor, Integer modelApproval, String referenceNumberCreditor,
+			Long itemNumber, City city, Currency paymentCurrency, DailyAccountBalance dailyAccountBalance,
+			TypesOfPayments paymentType) {
+		
+		this.id = id;
+		this.type = type;
+		this.debtorOrderer = debtorOrderer;
+		this.purposeOfPayment = purposeOfPayment;
+		this.creditorReceiver = creditorReceiver;
+		this.dateOfReceipt = dateOfReceipt;
+		this.dateCurrency = dateCurrency;
+		this.amount = amount;
+		this.debtorAccountXML = debtorAccountXML;
+		this.modelOfIndebtedness = modelOfIndebtedness;
+		this.referenceNumberOfIndebtedness = referenceNumberOfIndebtedness;
+		this.urgent = urgent;
+		this.typeOfError = typeOfError;
+		this.status = status;
+		this.paymentTypeXML = paymentTypeXML;
+		this.paymentCurrencyXML = paymentCurrencyXML;
+		this.cityXML = cityXML;
+		this.debtorAccount = debtorAccount;
+		this.accountCreditorXML = accountCreditorXML;
+		this.accountCreditor = accountCreditor;
+		this.modelApproval = modelApproval;
+		this.referenceNumberCreditor = referenceNumberCreditor;
+		this.itemNumber = itemNumber;
+		this.city = city;
+		this.paymentCurrency = paymentCurrency;
+		this.dailyAccountBalance = dailyAccountBalance;
+		this.paymentType = paymentType;
+	}
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private Long itemNumber; //ovo bi trebao da bude kljuc
+	private String type;
 	
-	@Column(columnDefinition="VARCHAR(256)")
-	private String debtorOrderer;
-	@Column(columnDefinition="VARCHAR(256)")
-	private String PurposeOfPayment;
-	@Column(columnDefinition="VARCHAR(256)")
-	private String creditorReceiver;
 	
-	private Date dateOfReceipt;
-	private Date dateCurrency;
 	
-	@Column(columnDefinition="VARCHAR(18)")
-	private String debtorAccount;
+	@Column
+	private String debtorOrderer; //uplatilac-isplatilac-duznik-nalogodavac
 	
-	@Column(precision=2)
-	private Long modelOfIndebtedness;
+	@Column
+	private String purposeOfPayment; //svrha placanja
 	
-	@Column(columnDefinition="VARCHAR(20)")
-	private String callNumberOfIndebtedness;
+	@Column
+	private String creditorReceiver; //primalac-poverilac
 	
-	@Column(columnDefinition="VARCHAR(18)")
-	private String accountCreditor;
+	private String dateOfReceipt; //datum prijema
 	
-	@Column(precision=2)
-	private Long modelOfApproval;
+	private String dateCurrency; //datum valute
 	
-	@Column(columnDefinition="VARCHAR(20)")
-	private String callForApprovalNumber;
+	@Column
+	private Double amount; //suma
 	
-	private Boolean urgent;
-	@Column(precision=15, scale=2)
-	private Long amount;
-	@Column(precision=1)
-	private Long typeOfError;
+	@Transient
+	private String debtorAccountXML; //racun duznika za XML
 	
-	private Boolean status;
+	@Column
+	private Integer modelOfIndebtedness; //model zaduzenja
+	
+	@Column
+	private String referenceNumberOfIndebtedness; //poziv na broj zaduzenja
+	
+	private Boolean urgent; //hitno?
+	
+	@Column
+	private Integer typeOfError; //tip greske
+	
+	@Column(length = 1)
+	private String status; //status
+	
+	@Transient
+	private String paymentTypeXML;
+	
+	@Transient
+	private String paymentCurrencyXML;
+	
+	@Transient
+	private String cityXML;
+	
+	
+	//------------------OVO IZNAD IDE NA NALOG ZA ISPLATU------------------
+	
+	
+	@ManyToOne
+	private Account debtorAccount; //racun duznika
+	
+	private String accountCreditorXML;
+	
+	@ManyToOne
+	private Account accountCreditor; //racun poverioca
+		
+	//------------------------------------
+		
+	private Integer modelApproval; //model odobrenja
+	
+	private String referenceNumberCreditor; //poziv na broj odobrenja
+	
+	//------------------------------------
+		
+	private Long itemNumber; //ovo bi trebao da bude kljuc 
+
+	@ManyToOne
+	private City city;
+	
+	@ManyToOne
+	private Currency paymentCurrency; //valuta placanja
+	
+	@OneToOne
+	private DailyAccountBalance dailyAccountBalance;
+	
+	@ManyToOne
+	private TypesOfPayments paymentType; //tip placanja
 
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
-		id = id;
+		this.id = id;
 	}
 
-	public Long getItemNumber() {
-		return itemNumber;
+	public String getType() {
+		return type;
 	}
 
-	public void setItemNumber(Long itemNumber) {
-		this.itemNumber = itemNumber;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public String getDebtorOrderer() {
@@ -79,11 +167,11 @@ public class StatementAnalysis implements Serializable{
 	}
 
 	public String getPurposeOfPayment() {
-		return PurposeOfPayment;
+		return purposeOfPayment;
 	}
 
 	public void setPurposeOfPayment(String purposeOfPayment) {
-		PurposeOfPayment = purposeOfPayment;
+		this.purposeOfPayment = purposeOfPayment;
 	}
 
 	public String getCreditorReceiver() {
@@ -94,68 +182,52 @@ public class StatementAnalysis implements Serializable{
 		this.creditorReceiver = creditorReceiver;
 	}
 
-	public Date getDateOfReceipt() {
+	public String getDateOfReceipt() {
 		return dateOfReceipt;
 	}
 
-	public void setDateOfReceipt(Date dateOfReceipt) {
+	public void setDateOfReceipt(String dateOfReceipt) {
 		this.dateOfReceipt = dateOfReceipt;
 	}
 
-	public Date getDateCurrency() {
+	public String getDateCurrency() {
 		return dateCurrency;
 	}
 
-	public void setDateCurrency(Date dateCurrency) {
+	public void setDateCurrency(String dateCurrency) {
 		this.dateCurrency = dateCurrency;
 	}
 
-	public String getDebtorAccount() {
-		return debtorAccount;
+	public Double getAmount() {
+		return amount;
 	}
 
-	public void setDebtorAccount(String debtorAccount) {
-		this.debtorAccount = debtorAccount;
+	public void setAmount(Double amount) {
+		this.amount = amount;
 	}
 
-	public Long getModelOfIndebtedness() {
+	public String getDebtorAccountXML() {
+		return debtorAccountXML;
+	}
+
+	public void setDebtorAccountXML(String debtorAccountXML) {
+		this.debtorAccountXML = debtorAccountXML;
+	}
+
+	public Integer getModelOfIndebtedness() {
 		return modelOfIndebtedness;
 	}
 
-	public void setModelOfIndebtedness(Long modelOfIndebtedness) {
+	public void setModelOfIndebtedness(Integer modelOfIndebtedness) {
 		this.modelOfIndebtedness = modelOfIndebtedness;
 	}
 
-	public String getCallNumberOfIndebtedness() {
-		return callNumberOfIndebtedness;
+	public String getReferenceNumberOfIndebtedness() {
+		return referenceNumberOfIndebtedness;
 	}
 
-	public void setCallNumberOfIndebtedness(String callNumberOfIndebtedness) {
-		this.callNumberOfIndebtedness = callNumberOfIndebtedness;
-	}
-
-	public String getAccountCreditor() {
-		return accountCreditor;
-	}
-
-	public void setAccountCreditor(String accountCreditor) {
-		this.accountCreditor = accountCreditor;
-	}
-
-	public Long getModelOfApproval() {
-		return modelOfApproval;
-	}
-
-	public void setModelOfApproval(Long modelOfApproval) {
-		this.modelOfApproval = modelOfApproval;
-	}
-
-	public String getCallForApprovalNumber() {
-		return callForApprovalNumber;
-	}
-
-	public void setCallForApprovalNumber(String callForApprovalNumber) {
-		this.callForApprovalNumber = callForApprovalNumber;
+	public void setReferenceNumberOfIndebtedness(String referenceNumberOfIndebtedness) {
+		this.referenceNumberOfIndebtedness = referenceNumberOfIndebtedness;
 	}
 
 	public Boolean getUrgent() {
@@ -166,31 +238,124 @@ public class StatementAnalysis implements Serializable{
 		this.urgent = urgent;
 	}
 
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public Long getTypeOfError() {
+	public Integer getTypeOfError() {
 		return typeOfError;
 	}
 
-	public void setTypeOfError(Long typeOfError) {
+	public void setTypeOfError(Integer typeOfError) {
 		this.typeOfError = typeOfError;
 	}
 
-	public Boolean getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
-	
 
+	public String getPaymentTypeXML() {
+		return paymentTypeXML;
+	}
+
+	public void setPaymentTypeXML(String paymentTypeXML) {
+		this.paymentTypeXML = paymentTypeXML;
+	}
+
+	public String getPaymentCurrencyXML() {
+		return paymentCurrencyXML;
+	}
+
+	public void setPaymentCurrencyXML(String paymentCurrencyXML) {
+		this.paymentCurrencyXML = paymentCurrencyXML;
+	}
+
+	public String getCityXML() {
+		return cityXML;
+	}
+
+	public void setCityXML(String cityXML) {
+		this.cityXML = cityXML;
+	}
+
+	public Account getDebtorAccount() {
+		return debtorAccount;
+	}
+
+	public void setDebtorAccount(Account debtorAccount) {
+		this.debtorAccount = debtorAccount;
+	}
+
+	public String getAccountCreditorXML() {
+		return accountCreditorXML;
+	}
+
+	public void setAccountCreditorXML(String accountCreditorXML) {
+		this.accountCreditorXML = accountCreditorXML;
+	}
+
+	public Account getAccountCreditor() {
+		return accountCreditor;
+	}
+
+	public void setAccountCreditor(Account accountCreditor) {
+		this.accountCreditor = accountCreditor;
+	}
+
+	public Integer getModelApproval() {
+		return modelApproval;
+	}
+
+	public void setModelApproval(Integer modelApproval) {
+		this.modelApproval = modelApproval;
+	}
+
+	public String getReferenceNumberCreditor() {
+		return referenceNumberCreditor;
+	}
+
+	public void setReferenceNumberCreditor(String referenceNumberCreditor) {
+		this.referenceNumberCreditor = referenceNumberCreditor;
+	}
+
+	public Long getItemNumber() {
+		return itemNumber;
+	}
+
+	public void setItemNumber(Long itemNumber) {
+		this.itemNumber = itemNumber;
+	}
+
+	public City getCity() {
+		return city;
+	}
+
+	public void setCity(City city) {
+		this.city = city;
+	}
+
+	public Currency getPaymentCurrency() {
+		return paymentCurrency;
+	}
+
+	public void setPaymentCurrency(Currency paymentCurrency) {
+		this.paymentCurrency = paymentCurrency;
+	}
+
+	public DailyAccountBalance getDailyAccountBalance() {
+		return dailyAccountBalance;
+	}
+
+	public void setDailyAccountBalance(DailyAccountBalance dailyAccountBalance) {
+		this.dailyAccountBalance = dailyAccountBalance;
+	}
+
+	public TypesOfPayments getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(TypesOfPayments paymentType) {
+		this.paymentType = paymentType;
+	}
+	
 }

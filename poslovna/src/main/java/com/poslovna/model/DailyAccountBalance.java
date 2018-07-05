@@ -5,61 +5,105 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class DailyAccountBalance implements Serializable {
 	
+	public DailyAccountBalance() {
+		
+	}
+	
+	public DailyAccountBalance(Long id, String date, Double previousState, Double newState, Double paymentTo,
+			Double paymentFrom, Account bankAccount) {
+		
+		this.id = id;
+		this.date = date;
+		this.previousState = previousState;
+		this.newState = newState;
+		this.paymentTo = paymentTo;
+		this.paymentFrom = paymentFrom;
+		this.bankAccount = bankAccount;
+	}
+
 	@Id
-	private Long Excerpt;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
 	
-	private Date date;
+	private String date;
 	
-	@Column(precision=15, scale=2)
-	private Long previousBalance;
-	@Column(precision=15, scale=2)
-	private Long profitOnAccount;
-	@Column(precision=15, scale=2)
-	private Long lossOnAccount;
-	@Column(precision=15, scale=2)
-	private Long newAccountBalance;
-	public Long getExcerpt() {
-		return Excerpt;
+	@Column
+	private Double previousState;
+	
+	@Column
+	private Double newState;
+	
+	@Column
+	private Double paymentTo;
+	
+	@Column
+	private Double paymentFrom;
+	
+	@ManyToOne
+	private Account bankAccount;
+
+	public Long getId() {
+		return id;
 	}
-	public void setExcerpt(Long excerpt) {
-		Excerpt = excerpt;
+
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public Date getDate() {
+
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+
+	public void setDate(String date) {
 		this.date = date;
 	}
-	public Long getPreviousBalance() {
-		return previousBalance;
-	}
-	public void setPreviousBalance(Long previousBalance) {
-		this.previousBalance = previousBalance;
-	}
-	public Long getProfitOnAccount() {
-		return profitOnAccount;
-	}
-	public void setProfitOnAccount(Long profitOnAccount) {
-		this.profitOnAccount = profitOnAccount;
-	}
-	public Long getLossOnAccount() {
-		return lossOnAccount;
-	}
-	public void setLossOnAccount(Long lossOnAccount) {
-		this.lossOnAccount = lossOnAccount;
-	}
-	public Long getNewAccountBalance() {
-		return newAccountBalance;
-	}
-	public void setNewAccountBalance(Long newAccountBalance) {
-		this.newAccountBalance = newAccountBalance;
-	}
-	
-	
 
+	public Double getPreviousState() {
+		return previousState;
+	}
+
+	public void setPreviousState(Double previousState) {
+		this.previousState = previousState;
+	}
+
+	public Double getNewState() {
+		return newState;
+	}
+
+	public void setNewState(Double newState) {
+		this.newState = newState;
+	}
+
+	public Double getPaymentTo() {
+		return paymentTo;
+	}
+
+	public void setPaymentTo(Double paymentTo) {
+		this.paymentTo = paymentTo;
+	}
+
+	public Double getPaymentFrom() {
+		return paymentFrom;
+	}
+
+	public void setPaymentFrom(Double paymentFrom) {
+		this.paymentFrom = paymentFrom;
+	}
+
+	public Account getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(Account bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+	
 }
