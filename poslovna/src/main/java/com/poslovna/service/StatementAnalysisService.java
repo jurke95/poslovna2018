@@ -6,13 +6,26 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poslovna.model.StatementAnalysis;
+import com.poslovna.repository.AccountRepository;
+import com.poslovna.repository.CityRepository;
+import com.poslovna.repository.CurrencyRepository;
 
 @Service
 public class StatementAnalysisService {
 
+	@Autowired
+	private AccountRepository accountRepository;
+	@Autowired
+	private CurrencyRepository currencyRepository;
+	@Autowired
+	private CityRepository cityRepository;
+	
+	
+	
 	
 	
 	private StatementAnalysis generateStatementAnalysis(StatementAnalysis xml) {
@@ -23,26 +36,22 @@ public class StatementAnalysisService {
 		s.setDateCurrency(xml.getDateCurrency());
 		s.setAmount(xml.getAmount());
 	    s.setItemNumber(xml.getItemNumber());
-	    s.setCityXML(xml.getCityXML());
 	    s.setDateOfReceipt(xml.getDateOfReceipt());
-	    s.setDebtorAccount(xml.getDebtorAccount());
-	    s.setDebtorAccountXML(xml.getDebtorAccountXML());
+	    s.setDebtorAccount(accountRepository.findOneByAccountnum(xml.getDebtorAccountXML()));
 	    s.setAccountCreditor(xml.getAccountCreditor());
-	    s.setAccountCreditorXML(xml.getAccountCreditorXML());
 	    s.setDebtorOrderer(xml.getDebtorOrderer());
 	    s.setModelApproval(xml.getModelApproval());
 	    s.setModelOfIndebtedness(xml.getModelOfIndebtedness());
-	    s.setPaymentCurrency(xml.getPaymentCurrency());
-	    s.setPaymentCurrencyXML(xml.getPaymentCurrencyXML());
+	    s.setPaymentCurrency(currencyRepository.findOneByPassword(xml.getPaymentCurrencyXML()));
 	    s.setPurposeOfPayment(xml.getPurposeOfPayment());
 	    s.setPaymentType(xml.getPaymentType());
-	    s.setPaymentTypeXML(xml.getPaymentTypeXML());
 	    s.setReferenceNumberCreditor(xml.getReferenceNumberCreditor());
 	    s.setReferenceNumberOfIndebtedness(xml.getReferenceNumberOfIndebtedness());
 	    s.setStatus(xml.getStatus());
 	    s.setType(xml.getType());
 	    s.setTypeOfError(xml.getTypeOfError());
 	    s.setUrgent(xml.getUrgent());
+	    
 	
 
 		return s;
