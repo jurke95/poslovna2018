@@ -30,7 +30,7 @@ public class StatementAnalysisService {
 	
 	private StatementAnalysis generateStatementAnalysis(StatementAnalysis xml) {
 		StatementAnalysis s = new StatementAnalysis();
-		s.setCity(xml.getCity());
+		s.setCity(cityRepository.findOneByName(xml.getCityXML()));
 		s.setCreditorReceiver(xml.getCreditorReceiver());
 		s.setDailyAccountBalance(xml.getDailyAccountBalance());
 		s.setDateCurrency(xml.getDateCurrency());

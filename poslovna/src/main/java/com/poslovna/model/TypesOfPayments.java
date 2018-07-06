@@ -19,7 +19,7 @@ public class TypesOfPayments implements Serializable{
 	public TypesOfPayments(Long id, String code, String nameOfCurrency) {
 	
 		this.id = id;
-		Code = code;
+		this.code=code;
 		this.nameOfCurrency = nameOfCurrency;
 	}
 
@@ -28,7 +28,7 @@ public class TypesOfPayments implements Serializable{
 	private Long id;
 	
 	@Column(columnDefinition="VARCHAR(3)") //Ovo treba da bude sifra sa tri broja...ne treba ID
-	private String Code;
+	private String code;
 	
 	@Column(columnDefinition="VARCHAR(120)")
 	private String nameOfCurrency;
@@ -41,12 +41,14 @@ public class TypesOfPayments implements Serializable{
 		id = id;
 	}
 
+	
+
 	public String getCode() {
-		return Code;
+		return code;
 	}
 
 	public void setCode(String code) {
-		Code = code;
+		this.code = code;
 	}
 
 	public String getNameOfCurrency() {
