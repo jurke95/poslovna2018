@@ -13,6 +13,7 @@ import com.poslovna.model.StatementAnalysis;
 import com.poslovna.repository.AccountRepository;
 import com.poslovna.repository.CityRepository;
 import com.poslovna.repository.CurrencyRepository;
+import com.poslovna.repository.TypesOfPaymentsRepository;
 
 @Service
 public class StatementAnalysisService {
@@ -25,6 +26,8 @@ public class StatementAnalysisService {
 	private CityRepository cityRepository;
 	
 	
+	@Autowired
+	private TypesOfPaymentsRepository typesOfPaymentsRepository;
 	
 	
 	
@@ -44,7 +47,7 @@ public class StatementAnalysisService {
 	    s.setModelOfIndebtedness(xml.getModelOfIndebtedness());
 	    s.setPaymentCurrency(currencyRepository.findOneByPassword(xml.getPaymentCurrencyXML()));
 	    s.setPurposeOfPayment(xml.getPurposeOfPayment());
-	    s.setPaymentType(xml.getPaymentType());
+	    s.setPaymentType(typesOfPaymentsRepository.findOneByCode(xml.getPaymentTypeXML()));
 	    s.setReferenceNumberCreditor(xml.getReferenceNumberCreditor());
 	    s.setReferenceNumberOfIndebtedness(xml.getReferenceNumberOfIndebtedness());
 	    s.setStatus(xml.getStatus());
