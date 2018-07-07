@@ -24,7 +24,7 @@ public class LegalEntity {
 		this.shortName = shortName;
 		this.location = location;
 		this.address = address;
-		this.phoneNumber = phoneNumber;
+		this.phonenumber = phoneNumber;
 		this.fax = fax;
 		this.email = email;
 		this.responsiblePerson = responsiblePerson;
@@ -57,7 +57,7 @@ public class LegalEntity {
 	private String address;
 	
 	@Column
-	private String phoneNumber;
+	private String phonenumber;
 	
 	@Column
 	private String fax;
@@ -132,12 +132,12 @@ public class LegalEntity {
 		this.address = address;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhonenumber(String phoneNumber) {
+		this.phonenumber = phoneNumber;
 	}
 
 	public String getFax() {

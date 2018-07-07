@@ -59,7 +59,16 @@ public class IndividualController {
 	}
 	
 	
-	
+	@GetMapping("/getallindividualofbank/{id}")
+	public ResponseEntity<List<Individual>> getallindividualofbank(@PathVariable Long id){
+		
+		List<Individual> individual = individualService.getAllIndividualsOfBank(id);
+		
+		if(individual!=null) {
+			return new ResponseEntity<>(individual,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 	
 	
 }

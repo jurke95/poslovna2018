@@ -89,21 +89,15 @@ public class Individual {
 		this.email = email;
 	}
 
-	public String getPhoneNumber() {
-		return phonenumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phonenumber = phoneNumber;
-	}
-
 	public String getPhonenumber() {
 		return phonenumber;
 	}
 
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+	public void setPhonenumber(String phoneNumber) {
+		this.phonenumber = phoneNumber;
 	}
+
+	
 
 	public List<Bank> getBank() {
 		List<Bank> listanks = new ArrayList<>(bank);
