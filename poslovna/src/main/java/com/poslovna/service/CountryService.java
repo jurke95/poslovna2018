@@ -34,9 +34,13 @@ public class CountryService {
 	
 	public Country save(Country country) {
 		
-		Country country1 = countryRepository.save(country);
-		
-		return country1;
+		if(country.getCode().length()==3) {
+			Country country1 = countryRepository.save(country);
+			return country1;
+		}
+		else {
+			return null;
+		}
 	}
 	
 	public Country edit(Long id, Country country) {
@@ -45,7 +49,12 @@ public class CountryService {
 		
 		if(c!=null) {
 			c.setName(country.getName());
-			c.setCode(country.getCode());
+			if(country.getCode().length()==3) {
+				c.setCode(country.getCode());
+			}
+			else {
+				return null;
+			}
 		
 			countryRepository.save(c);
 		
@@ -58,8 +67,11 @@ public class CountryService {
 	public Country delete(Long id) {
 		
 		Country c = countryRepository.findByIdEquals(id);
-		
+		if(c!=null) {
+	
 		countryRepository.delete(c);
+		
+		}
 		
 		return c;
 	}
