@@ -27,7 +27,7 @@ public class StatementAnalysis implements Serializable{
 			String status, String paymentTypeXML, String paymentCurrencyXML, String cityXML, Account debtorAccount,
 			String accountCreditorXML, Account accountCreditor, Integer modelApproval, String referenceNumberCreditor,
 			Long itemNumber, City city, Currency paymentCurrency, DailyAccountBalance dailyAccountBalance,
-			TypesOfPayments paymentType) {
+			TypesOfPayments paymentType,Double sum) {
 		
 		this.id = id;
 		this.type = type;
@@ -56,6 +56,7 @@ public class StatementAnalysis implements Serializable{
 		this.paymentCurrency = paymentCurrency;
 		this.dailyAccountBalance = dailyAccountBalance;
 		this.paymentType = paymentType;
+		this.sum=sum;
 	}
 
 	@Id
@@ -141,6 +142,8 @@ public class StatementAnalysis implements Serializable{
 	
 	@ManyToOne
 	private TypesOfPayments paymentType; //tip placanja
+	
+	private Double sum;
 
 	public Long getId() {
 		return id;
@@ -357,5 +360,14 @@ public class StatementAnalysis implements Serializable{
 	public void setPaymentType(TypesOfPayments paymentType) {
 		this.paymentType = paymentType;
 	}
+
+	public Double getSum() {
+		return sum;
+	}
+
+	public void setSum(Double sum) {
+		this.sum = sum;
+	}
+	
 	
 }
