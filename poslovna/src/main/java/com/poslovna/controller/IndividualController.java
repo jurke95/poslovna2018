@@ -58,4 +58,8 @@ public class IndividualController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	
+	
+	
+	
 }

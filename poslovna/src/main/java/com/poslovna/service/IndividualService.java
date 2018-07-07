@@ -39,7 +39,19 @@ public class IndividualService {
 	
 	
 	
-	
+	public List<Individual> getAllIndividualsOfBank(Long id){
+		
+		List<Individual> listIndi = individualRepositroy.findAll();
+		
+		List<Individual> retlits = new ArrayList<>();
+		
+		for(Individual indi: listIndi) {
+			//if(indi.get)
+		}
+		
+		return retlits;
+		
+	}
 	
 	
 }
