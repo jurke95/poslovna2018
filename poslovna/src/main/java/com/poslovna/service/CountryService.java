@@ -76,5 +76,17 @@ public class CountryService {
 		return c;
 	}
 	
+	public List<Country> searchCounty(Country country){
+		
+		List<Country> countries = countryRepository.findByNameContainingIgnoreCaseAndCodeContainingIgnoreCase(country.getName(), country.getCode());
+		
+		if(countries!=null) {
+			
+			return countries;
+		}
+		
+		return null;
+	}
+	
 
 }

@@ -94,5 +94,18 @@ public class CountryController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
+	@PutMapping(value="/searchCountries")
+	public ResponseEntity<List<Country>> searchCountries(@RequestBody Country country){
+		
+		List<Country> countries = countryService.searchCounty(country);
+		
+		if(countries==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(countries, HttpStatus.OK);
+		
+	}
+	
 	
 }
