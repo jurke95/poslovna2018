@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.transaction.Transactional;
 
 @Entity
 public class Individual {
@@ -38,7 +40,8 @@ public class Individual {
 	
 	private String phonenumber;
 	
-	@ManyToMany
+	
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Bank> bank = new HashSet();
 
 	public Long getId() {
@@ -98,7 +101,7 @@ public class Individual {
 	}
 
 	
-
+	
 	public List<Bank> getBank() {
 		List<Bank> listanks = new ArrayList<>(bank);
 		if(listanks.size()>0) {
@@ -111,7 +114,9 @@ public class Individual {
 		this.bank = bank;
 	}
 
-
+	public void setBank2(Bank bank) {
+		this.bank.add(bank);
+	}
 	
 	
 }
