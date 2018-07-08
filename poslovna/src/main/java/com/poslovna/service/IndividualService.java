@@ -6,7 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poslovna.controller.dto.IndividualDTO;
+import com.poslovna.model.Bank;
 import com.poslovna.model.Individual;
+import com.poslovna.repository.BankRepository;
 import com.poslovna.repository.IndividualRepositroy;
 
 @Service
@@ -15,10 +18,25 @@ public class IndividualService {
 	@Autowired
 	private IndividualRepositroy individualRepositroy;
 	
+	@Autowired
+	private BankRepository bankRepository;
 	
-	public Individual addIndividual(Individual indi) {
+	public Individual addIndividual(IndividualDTO indi) {
 				
-		return individualRepositroy.save(indi);
+		Individual individual = new Individual();
+		Bank bank = bankRepository.findByIdEquals(indi.getBankId());
+		if(indi!=null && bank!=null) {
+			individual.setName(indi.getName());
+			individual.setSurname(indi.getSurname());
+			individual.setAddress(indi.getAddress());
+			individual.setEmail(indi.getEmail());
+			individual.setJmbg(indi.getJmbg());
+			individual.setPhonenumber(indi.getPhonenumber());
+			individual.setBank2(bank);
+			
+			return individualRepositroy.save(individual);
+		}
+		return null;
 	}
 	
 	

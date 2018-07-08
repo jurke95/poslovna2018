@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poslovna.controller.dto.IndividualDTO;
 import com.poslovna.model.Individual;
 import com.poslovna.service.IndividualService;
 
@@ -21,12 +22,12 @@ import com.poslovna.service.IndividualService;
 @RestController
 @RequestMapping("/individual")
 public class IndividualController {
-
+	
 	@Autowired
 	private IndividualService individualService;
 	
 	@PostMapping("/addindividual")
-	public ResponseEntity<Individual> addindividual(@RequestBody Individual indi){
+	public ResponseEntity<Individual> addindividual(@RequestBody IndividualDTO indi){
 		
 		Individual individual = individualService.addIndividual(indi);
 		
@@ -37,14 +38,14 @@ public class IndividualController {
 	}
 	
 	@GetMapping("/deleteindividual/{id}")
-	public ResponseEntity<String> deleteindividual(@PathVariable Long id){
+	public ResponseEntity<Individual> deleteindividual(@PathVariable Long id){
 		
 		Individual individual = individualService.deleteIndividual(id);
 		
 		if(individual!=null) {
-			return new ResponseEntity<>("Successful deleted individual",HttpStatus.OK);
+			return new ResponseEntity<>(individual,HttpStatus.OK);
 		}
-		return new ResponseEntity<>("Unsuccessful deleting",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	@GetMapping("/getallindividual")
