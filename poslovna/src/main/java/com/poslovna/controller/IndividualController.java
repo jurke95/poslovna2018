@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -70,6 +71,31 @@ public class IndividualController {
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	
+	
+	@PutMapping("/editindividual")
+	public ResponseEntity<Individual> editindividuals(@RequestBody IndividualDTO indi){
+		
+		Individual individual = individualService.editIndividual(indi);
+		
+		if(individual!=null) {
+			return new ResponseEntity<>(individual,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
+	@GetMapping("/findindividualofbank/{idindi}/{idbank}")
+	public ResponseEntity<Individual> findindividualofbank(@PathVariable Long idindi,@PathVariable Long idbank ){
+		
+		Individual individual = individualService.findIndividualOBank(idindi, idbank);
+		
+		if(individual!=null) {
+			return new ResponseEntity<>(individual,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
 	
 	
 }

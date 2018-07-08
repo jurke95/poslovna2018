@@ -6,6 +6,8 @@ public class IndividualDTO {
 		
 	}
 	
+	private Long id;
+	
 	private String name;
 	
 	private String surname;
@@ -74,6 +76,14 @@ public class IndividualDTO {
 
 	public void setBankId(Long bankId) {
 		this.bankId = bankId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }
