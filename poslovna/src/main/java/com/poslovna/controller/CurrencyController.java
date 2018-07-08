@@ -75,6 +75,7 @@ public class CurrencyController {
 		Currency currency = currencyService.editCurrency(id, currencyEditDTO);
 		
 		return currency;
+		
 	}
 	
 	

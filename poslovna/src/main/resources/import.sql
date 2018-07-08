@@ -1,5 +1,8 @@
 INSERT INTO `poslovna`.`country` (`code`, `name`) VALUES ('232','Srbija');
 INSERT INTO `poslovna`.`country` (`code`, `name`) VALUES ('257','Grcka');
+INSERT INTO `poslovna`.`country` (`code`, `name`) VALUES ('233','Bosna');
+INSERT INTO `poslovna`.`country` (`code`, `name`) VALUES ('252','Rusija');
+
 INSERT INTO `poslovna`.`city` (`code`, `name`, `post_num`, `country_id`) VALUES ('144','Novi Sad', '21000', '1');
 INSERT INTO `poslovna`.`city` (`code`, `name`, `post_num`, `country_id`) VALUES ('482','Beograd', '22300', '1');
 INSERT INTO `poslovna`.`city` (`code`, `name`, `post_num`, `country_id`) VALUES ('738','Atina', '13800', '2');
@@ -19,3 +22,9 @@ INSERT INTO `poslovna`.`legal_entity` (`email`, `address`, `jmbg`,`name`, `short
 
 INSERT INTO `poslovna`.`individual_bank` (`individual_id`, `bank_id`) VALUES ('1','2');
 INSERT INTO `poslovna`.`individual_bank` (`individual_id`, `bank_id`) VALUES ('2','2');
+
+
+INSERT INTO `poslovna`.`currency` (`password`, `name`,`domicile`, `country_id`) VALUES ('DIN','Dinar',1,'1');
+INSERT INTO `poslovna`.`currency` (`password`, `name`,`domicile`, `country_id`) VALUES ('EUR','Euro',0,'2');
+INSERT INTO `poslovna`.`currency` (`password`, `name`,`domicile`, `country_id`) VALUES ('KVM','Marka',1,'3');
+INSERT INTO `poslovna`.`currency` (`password`, `name`,`domicile`, `country_id`) VALUES ('RUB','Rublja',1,'4');
