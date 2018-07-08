@@ -78,12 +78,22 @@ public class CurrencyService {
  
  
  
- 
- 
- 
- 
- 
- 
+     public Currency editCurrency(Long currencyId, CurrencyDTO currencyEditDTO) {
+ 		
+ 		Currency currency = currencyRepository.findOneById(currencyId);
+ 		
+ 		currency.setName(currencyEditDTO.getName());
+ 		currency.setPassword(currencyEditDTO.getPassword());
+ 		currency.setDomicile(currencyEditDTO.isDomicile());
+ 		
+ 		Country country = countryRepository.findByNameEquals(currencyEditDTO.getCountry());
+ 		currency.setCountry(country);
+ 		
+ 		currencyRepository.save(currency);
+ 			
+ 		return currency;
+ 		
+ 	}
  
 	
 }
