@@ -65,5 +65,38 @@ public class IndividualService {
 		
 	}
 	
+	public Individual findIndividualOBank(Long idindi,Long idbank){
+		
+		List<Individual> listIndi = individualRepositroy.findByBank_idEquals(idbank);
+		for(int i = 0; i<listIndi.size();i++) {
+			if(listIndi.get(i).getId()==idindi) {
+				return listIndi.get(i);
+			}
+			
+		}
+		
+		return null;
+		
+	}
+	
+	public Individual editIndividual(IndividualDTO indidto) {
+		
+		Individual individual = individualRepositroy.findByIdEquals(indidto.getId());
+		
+		if(individual!=null) {
+			
+			individual.setName(indidto.getName());
+			individual.setSurname(indidto.getSurname());
+			individual.setAddress(indidto.getAddress());
+			individual.setEmail(indidto.getEmail());
+			individual.setJmbg(indidto.getJmbg());
+			individual.setPhonenumber(indidto.getPhonenumber());
+			
+			return individualRepositroy.save(individual);
+		}
+		
+		return null;
+	}
+	
 	
 }
