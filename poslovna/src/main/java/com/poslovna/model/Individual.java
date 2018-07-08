@@ -1,27 +1,26 @@
 package com.poslovna.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Individual {
+
+	
 
 	public Individual() {
 		
 	}
 	
-	public Individual(Long id, String name, String surname, String jmbg, String address, String email,
-			String phoneNumber) {
-		this.id = id;
-		this.name = name;
-		this.surname = surname;
-		this.jmbg = jmbg;
-		this.address = address;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-	}
+	
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,7 +36,10 @@ public class Individual {
 	
 	private String email;
 	
-	private String phoneNumber;
+	private String phonenumber;
+	
+	@ManyToMany
+	private Set<Bank> bank = new HashSet();
 
 	public Long getId() {
 		return id;
@@ -87,13 +89,29 @@ public class Individual {
 		this.email = email;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhonenumber(String phoneNumber) {
+		this.phonenumber = phoneNumber;
 	}
+
+	
+
+	public List<Bank> getBank() {
+		List<Bank> listanks = new ArrayList<>(bank);
+		if(listanks.size()>0) {
+			return listanks;
+		}
+		return null;
+	}
+
+	public void setBank(Set<Bank> bank) {
+		this.bank = bank;
+	}
+
+
 	
 	
 }

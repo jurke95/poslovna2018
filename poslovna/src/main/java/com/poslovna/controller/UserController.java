@@ -13,7 +13,7 @@ import com.poslovna.model.Bank;
 import com.poslovna.model.User;
 import com.poslovna.service.UserService;
 
-@CrossOrigin
+@CrossOrigin(origins="http://localhost:4200",allowedHeaders="*")
 @RestController
 @RequestMapping("/login")
 public class UserController {
