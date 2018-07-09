@@ -61,5 +61,17 @@ public class LegalEntityController {
 		
 		return new ResponseEntity<>(legEntities, HttpStatus.OK);
 	}
+	
+	@GetMapping("/getlegalsofbank/{id}")
+	public ResponseEntity<List<LegalEntity>> getlegalsofbank(@PathVariable Long id){
+		
+		List<LegalEntity> legEntities = legalEntityService.getAllLegalEntityOfBank(id);
+		
+		if(legEntities==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(legEntities, HttpStatus.OK);
+	}
 
 }

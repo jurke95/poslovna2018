@@ -38,4 +38,13 @@ public class LegalEntityService {
 		
 		return legEntities;
 	}
+	
+	
+	public List<LegalEntity> getAllLegalEntityOfBank (Long id){
+		
+		List<LegalEntity> legalentity = legalEntRepository.findByBank_idEquals(id);
+		
+		return legalentity;
+	}
+	
 }

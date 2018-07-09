@@ -15,14 +15,25 @@ INSERT INTO `poslovna`.`user` (`email`, `password`, `bank_id`) VALUES ('saska@gm
 
 INSERT INTO `poslovna`.`individual` (`email`, `address`, `jmbg`,`name`, `surname`, `phonenumber`) VALUES ('jurke@gmail.com','Mileve Maric bb','22071995800690','Marko','Juric','069234152');
 INSERT INTO `poslovna`.`individual` (`email`, `address`, `jmbg`,`name`, `surname`, `phonenumber`) VALUES ('dulke@gmail.com','Bulevar Evrope 32','03041995800876','Dragan','Dulic','065867465');
+INSERT INTO `poslovna`.`individual` (`email`, `address`, `jmbg`,`name`, `surname`, `phonenumber`) VALUES ('peca@gmail.com','Kralja Aleksandra','0103995800765','Damjan','Nicic','067889654');
+INSERT INTO `poslovna`.`individual` (`email`, `address`, `jmbg`,`name`, `surname`, `phonenumber`) VALUES ('saska@gmail.com','Safarikova 43','2002995600777','Aleksandra','Grujic','061572365');
 
-INSERT INTO `poslovna`.`legal_entity` (`email`, `address`, `jmbg`,`name`, `short_name`, `phonenumber`) VALUES ('firmaA@gmail.com','Kacki put 56','13041995200876','Afirma','af','065867465');
-INSERT INTO `poslovna`.`legal_entity` (`email`, `address`, `jmbg`,`name`, `short_name`, `phonenumber`) VALUES ('firmaB@gmail.com','Partizanska 43','24041995200876','Bfirma','bf','066789065');
+
+INSERT INTO `poslovna`.`legal_entity` (`email`, `address`, `jmbg`,`name`, `short_name`, `phonenumber`, `fax`, `mbr`, `delivery_address`, `location`) VALUES ('firmaA@gmail.com','Kacki put 56','13041995200876','Afirma','af','065867465','11','432522','deliveryA@gmail.com','Novi Sad');
+INSERT INTO `poslovna`.`legal_entity` (`email`, `address`, `jmbg`,`name`, `short_name`, `phonenumber`, `fax`, `mbr`, `delivery_address`, `location`) VALUES ('firmaB@gmail.com','Partizanska 43','24041995200876','Bfirma','bf','066789065','22','652743','deliveryB@gmail.com','Beograd');
+INSERT INTO `poslovna`.`legal_entity` (`email`, `address`, `jmbg`,`name`, `short_name`, `phonenumber`, `fax`, `mbr`, `delivery_address`, `location`) VALUES ('firmaC@gmail.com','Njegoseva 44','2341995200876','Cfirma','cf','0636543465','33','782134','deliveryC@gmail.com','Nis');
+INSERT INTO `poslovna`.`legal_entity` (`email`, `address`, `jmbg`,`name`, `short_name`, `phonenumber`, `fax`, `mbr`, `delivery_address`, `location`) VALUES ('firmaD@gmail.com','Partizanska 43','24041995200876','Dfirma','df','061323165','44','653852','deliveryD@gmail.com','Subotica');
 
 
 INSERT INTO `poslovna`.`individual_bank` (`individual_id`, `bank_id`) VALUES ('1','2');
 INSERT INTO `poslovna`.`individual_bank` (`individual_id`, `bank_id`) VALUES ('2','2');
+INSERT INTO `poslovna`.`individual_bank` (`individual_id`, `bank_id`) VALUES ('3','2');
+INSERT INTO `poslovna`.`individual_bank` (`individual_id`, `bank_id`) VALUES ('4','2');
 
+INSERT INTO `poslovna`.`legal_entity_bank` (`legal_entity_id`, `bank_id`) VALUES ('1','2');
+INSERT INTO `poslovna`.`legal_entity_bank` (`legal_entity_id`, `bank_id`) VALUES ('2','2');
+INSERT INTO `poslovna`.`legal_entity_bank` (`legal_entity_id`, `bank_id`) VALUES ('3','2');
+INSERT INTO `poslovna`.`legal_entity_bank` (`legal_entity_id`, `bank_id`) VALUES ('4','2');
 
 INSERT INTO `poslovna`.`currency` (`password`, `name`,`domicile`, `country_id`) VALUES ('DIN','Dinar',1,'1');
 INSERT INTO `poslovna`.`currency` (`password`, `name`,`domicile`, `country_id`) VALUES ('EUR','Euro',0,'2');

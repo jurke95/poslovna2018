@@ -1,10 +1,17 @@
 package com.poslovna.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -83,6 +90,10 @@ public class LegalEntity {
 	
 	@Column
 	private String taxNumber;
+	
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	private Set<Bank> bank = new HashSet();
 	
 	/* ????
 	@Column
@@ -216,6 +227,20 @@ public class LegalEntity {
 		this.activity = activity;
 	}
 	
-	
+	public List<Bank> getBank() {
+		List<Bank> listanks = new ArrayList<>(bank);
+		if(listanks.size()>0) {
+			return listanks;
+		}
+		return null;
+	}
+
+	public void setBank(Set<Bank> bank) {
+		this.bank = bank;
+	}
+
+	public void setBank2(Bank bank) {
+		this.bank.add(bank);
+	}
 	
 }
