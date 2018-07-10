@@ -52,6 +52,7 @@ public class CurrencyService {
 		Country c=countryRepository.findByNameEquals(currencyDTO.getCountry());
 		currency.setCountry(c);
 		currency.setName(currencyDTO.getName());
+		currency.setPassword(currencyDTO.getPassword());
 		
 		if(currencyDTO.isDomicile()==true) {
 			currency.setDomicile(true);
