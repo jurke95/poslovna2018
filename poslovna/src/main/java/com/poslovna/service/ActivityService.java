@@ -1,5 +1,7 @@
 package com.poslovna.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,19 @@ public class ActivityService {
 	
 	public void deleteActivity(Long id){
 		 activityRepository.delete(activityRepository.findByIdEquals(id));
+	}
+	
+	
+	public Activity getActivity(Long id){
+		 Activity a=activityRepository.findByIdEquals(id);
+		 return a; 
+		 
+	}
+	
+	public List<Activity> getAllActivities(){
+		 List<Activity> a=activityRepository.findAll();
+		 return a; 
+		 
 	}
 
 }
