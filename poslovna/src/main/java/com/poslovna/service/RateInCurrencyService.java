@@ -1,5 +1,7 @@
 package com.poslovna.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,8 @@ import com.poslovna.model.RateInCurrency;
 import com.poslovna.repository.CurrencyRepository;
 import com.poslovna.repository.ExchangeRateRepository;
 import com.poslovna.repository.RateInCurrencyRepository;
+
+import poslovna_banka.model.ExchangeRateInCurrency;
 
 
 
@@ -29,6 +33,20 @@ public class RateInCurrencyService {
 	@Autowired
 	private RateInCurrencyRepository rateInCurrencyRepository;
 	
+	
+	
+	
+	
+	public List<RateInCurrency> getRatesInCurrency(Long id) {
+		
+		
+		  ExchangeRate exchRate = exchangeRateRepository.findOneById(id);
+		  
+		  List<RateInCurrency> ratesInCurrency = rateInCurrencyRepository.findByExchangeRate(exchRate);
+		
+		
+		return ratesInCurrency;
+	}
 	
 	
 	
