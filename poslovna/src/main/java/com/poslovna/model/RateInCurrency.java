@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
 
 @Entity
 public class RateInCurrency implements Serializable {
@@ -15,14 +17,14 @@ public class RateInCurrency implements Serializable {
 	@Id
 	private Long id;
 	
-	@Column(columnDefinition="Decimal(9,4)")
-	private Long buying;
+	@Column
+	private String buying;
 	
-	@Column(columnDefinition="Decimal(9,4)")
-	private Long average;
+	@Column
+	private String average;
 	
-	@Column(columnDefinition="Decimal(9,4)")
-	private Long selling;
+	@Column
+	private String selling;
 	
 	
 	@ManyToOne
@@ -31,18 +33,16 @@ public class RateInCurrency implements Serializable {
 	@ManyToOne
 	private Currency changeto;
 	
+	@ManyToOne
+	private ExchangeRate exchangeRate;
 	
-	
-	
-
-	public RateInCurrency(Long buying, Long average, Long selling, Currency primary, Currency changeto) {
-		super();
-		this.buying = buying;
-		this.average = average;
-		this.selling = selling;
-		this.primary = primary;
-		this.changeto = changeto;
+	public RateInCurrency(){
+		
 	}
+
+
+
+	
 
 	public Long getId() {
 		return id;
@@ -54,29 +54,54 @@ public class RateInCurrency implements Serializable {
 
 	
 
-	public Long getBuying() {
+
+	public String getBuying() {
 		return buying;
 	}
 
-	public void setBuying(Long buying) {
+
+
+
+
+	public void setBuying(String buying) {
 		this.buying = buying;
 	}
 
-	public Long getAverage() {
+
+
+
+
+	public String getAverage() {
 		return average;
 	}
 
-	public void setAverage(Long average) {
+
+
+
+
+	public void setAverage(String average) {
 		this.average = average;
 	}
 
-	public Long getSelling() {
+
+
+
+
+	public String getSelling() {
 		return selling;
 	}
 
-	public void setSelling(Long selling) {
+
+
+
+
+	public void setSelling(String selling) {
 		this.selling = selling;
 	}
+
+
+
+
 
 	public Currency getPrimary() {
 		return primary;
@@ -92,6 +117,14 @@ public class RateInCurrency implements Serializable {
 
 	public void setChangeto(Currency changeto) {
 		this.changeto = changeto;
+	}
+
+	public ExchangeRate getExchangeRate() {
+		return exchangeRate;
+	}
+
+	public void setExchangeRate(ExchangeRate exchangeRate) {
+		this.exchangeRate = exchangeRate;
 	}
 
 	

@@ -29,16 +29,24 @@ public class ExchangeRate implements Serializable {
 	@JoinColumn(name="bank_id")
 	private Bank bank;
 	
+	private int number;
+	
+	public ExchangeRate() {
+		// TODO Auto-generated constructor stub
+	}
+
+	
 
 
 	
-	public ExchangeRate(String date, String numberExchangeRate, String startsOn, Bank bank) {
+	public ExchangeRate(String date, String numberExchangeRate, String startsOn, Bank bank,int number) {
 		super();
 		
 		this.date = date;
 		this.numberExchangeRate = numberExchangeRate;
 		this.startsOn = startsOn;
 		this.bank = bank;
+		this.number=number;
 	}
 
 	public Long getId() {
@@ -81,6 +89,22 @@ public class ExchangeRate implements Serializable {
 
 	public void setBank(Bank bank) {
 		this.bank = bank;
+	}
+
+
+
+
+
+	public int getNumber() {
+		return number;
+	}
+
+
+
+
+
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 	
