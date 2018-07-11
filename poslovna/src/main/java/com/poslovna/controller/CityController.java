@@ -71,7 +71,7 @@ public class CityController {
 	
 	@PutMapping("/editCity/{id}")
 	public ResponseEntity<City> editCity(@PathVariable Long id, @RequestBody CityDTO city){
-		
+		System.out.println("aaaaaaa");
 		City city1 = cityService.editCity(id, city);
 		
 		if(city1==null) {
@@ -91,6 +91,31 @@ public class CityController {
 		}
 		
 		return new ResponseEntity<>(city1, HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/getCity2/{id}")
+	public ResponseEntity<City> getCountry(@PathVariable Long id){
+		
+		City city = cityService.getCity2(id);
+		
+		if(city==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(city,HttpStatus.OK);
+	}
+	
+	@PutMapping(value="/searchCities")
+	public ResponseEntity<List<City>> searchCountries(@RequestBody City city){
+		
+		List<City> cities = cityService.searchCity(city);
+		
+		if(cities==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(cities, HttpStatus.OK);
+		
 	}
 	
 	

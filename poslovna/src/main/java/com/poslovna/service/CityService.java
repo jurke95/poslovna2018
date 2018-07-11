@@ -77,5 +77,23 @@ public class CityService {
 		
 	}
 	
+	public City getCity2(Long id) {
+		City country = cityReposiotry.findByIdEquals(id);
+		
+		return country;
+	}
+	
+	public List<City> searchCity(City city){
+		
+		List<City> cities = cityReposiotry.findByNameContainingIgnoreCaseAndCodeContainingIgnoreCaseAndPostNumContainingIgnoreCase(city.getName(), city.getCode(), city.getPostNum());
+		
+		if(cities!=null) {
+			
+			return cities;
+		}
+		
+		return null;
+	}
+	
 	
 }
