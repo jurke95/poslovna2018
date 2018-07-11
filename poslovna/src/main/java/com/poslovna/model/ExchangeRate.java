@@ -29,6 +29,8 @@ public class ExchangeRate implements Serializable {
 	@JoinColumn(name="bank_id")
 	private Bank bank;
 	
+	
+	
 
 
 	
