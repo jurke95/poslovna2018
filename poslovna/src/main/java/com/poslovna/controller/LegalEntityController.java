@@ -29,9 +29,9 @@ public class LegalEntityController {
 	private LegalEntityService legalEntityService;
 	
 	@PostMapping("/addLegEntity")
-	public ResponseEntity<LegalEntity> addNewLegalEntity(@RequestBody LegalEntity legEnt){
+	public ResponseEntity<LegalEntity> addNewLegalEntity(@RequestBody LegalEntityDTO legEntdto){
 		
-		LegalEntity legalEntity = legalEntityService.addLegalEntity(legEnt);
+		LegalEntity legalEntity = legalEntityService.addLegalEntity(legEntdto);
 		
 		if(legalEntity==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
