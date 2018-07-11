@@ -29,7 +29,7 @@ public class CurrencyController {
 	@Autowired
 	private CurrencyService currencyService;
 	
-	
+	//comment
 	
 	
 	@GetMapping("/getCurrencies") 
