@@ -1,5 +1,6 @@
 package com.poslovna.controller;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,38 +14,43 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.poslovna.controller.dto.RateInCurrencyDTO;
-import com.poslovna.model.RateInCurrency;
-import com.poslovna.service.RateInCurrencyService;
+import com.poslovna.controller.dto.ExchangeRateDTO;
+import com.poslovna.model.ExchangeRate;
+import com.poslovna.service.ExchangeRateService;
+
+
 
 
 
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/exchangerate")
-class ExchangeRateController {
-	
-	
-	@Autowired
-	private RateInCurrencyService rateInCurrencyService;
+public class ExchangeRateController {
 
 	
-	@PostMapping("/newrateincurrency")
-	public ResponseEntity<RateInCurrency> newExchangeRateInCurrency(@RequestBody RateInCurrencyDTO rateInCurrencyDTO) {
+	@Autowired
+	ExchangeRateService exchangeRateService;
+	
+	
+	
+	@GetMapping("/getExchangeRates/{id}")
+	public ResponseEntity<List<ExchangeRate>> getExchangeRates(@PathVariable Long id) {
 		
-		RateInCurrency rateInCurrency = rateInCurrencyService.newRateInCurrency(rateInCurrencyDTO);
+		List<ExchangeRate> exchangeRates = exchangeRateService.getAllExchangeRatesByBank(id);
 		
-		return new ResponseEntity<RateInCurrency>(rateInCurrency,HttpStatus.OK);
+		return new ResponseEntity<List<ExchangeRate>>(exchangeRates,HttpStatus.OK);
 	}
 	
 	
-	@GetMapping("/getChangesInCurrency/{id}")
-	public ResponseEntity<List<RateInCurrency>> getExchangeRatesInCurrency(@PathVariable Long id) {
+	@PostMapping("/newExchangeRate")
+	public ResponseEntity<ExchangeRate> newExchangeRate(@RequestBody ExchangeRateDTO exchangeRateDTO) throws ParseException {
 		
-		List<RateInCurrency> exchangeRatesInCurrency = rateInCurrencyService.getRatesInCurrency(id);
-		
-		return new ResponseEntity<List<RateInCurrency>>(exchangeRatesInCurrency,HttpStatus.OK);
-		
+		ExchangeRate exchangeRate = exchangeRateService.newExchangeRate(exchangeRateDTO);
+	
+		return new ResponseEntity<ExchangeRate>(exchangeRate,HttpStatus.OK);
 	}
+	
+	
+	
 	
 }
