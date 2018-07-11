@@ -1,36 +1,28 @@
-package com.poslovna.model;
+package com.poslovna.controller.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+public class ActivityDTO {
 
-@Entity
-public class Activity {
-	
-	
-	
-	
-	
-	public Activity() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Activity(Long id, String code, String name) {
-		
-		this.id = id;
-		this.code = code;
-		this.name = name;
-	}
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	private String code;
 	
 	private String name;
+	
+	
+	
+	
+
+	public ActivityDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ActivityDTO(Long id, String code, String name) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+	}
 
 	public Long getId() {
 		return id;
@@ -55,5 +47,6 @@ public class Activity {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	
 }
