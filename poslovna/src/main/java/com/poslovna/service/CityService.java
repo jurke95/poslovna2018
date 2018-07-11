@@ -41,7 +41,7 @@ public class CityService {
 		c.setCode(city.getCode());
 		c.setPostNum(city.getPostNum());
 		
-		Country country = countryRepository.findByNameEquals(city.getCountry());
+		Country country = countryRepository.findByNameEquals(city.getCountryS());
 		c.setCountry(country);
 		
 		cityReposiotry.save(c);
@@ -59,7 +59,7 @@ public class CityService {
 		c.setCode(city.getCode());
 		c.setPostNum(city.getPostNum());
 		
-		Country country = countryRepository.findByNameEquals(city.getCountry());
+		Country country = countryRepository.findByNameEquals(city.getCountryS());
 		c.setCountry(country);
 		
 		cityReposiotry.save(c);
@@ -78,9 +78,9 @@ public class CityService {
 	}
 	
 	public City getCity2(Long id) {
-		City country = cityReposiotry.findByIdEquals(id);
+		City city = cityReposiotry.findByIdEquals(id);
 		
-		return country;
+		return city;
 	}
 	
 	public List<City> searchCity(City city){

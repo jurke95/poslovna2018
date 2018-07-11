@@ -71,7 +71,8 @@ public class CityController {
 	
 	@PutMapping("/editCity/{id}")
 	public ResponseEntity<City> editCity(@PathVariable Long id, @RequestBody CityDTO city){
-		System.out.println("aaaaaaa");
+		System.out.println(city.getName());
+		System.out.println(city.getCountryS());
 		City city1 = cityService.editCity(id, city);
 		
 		if(city1==null) {

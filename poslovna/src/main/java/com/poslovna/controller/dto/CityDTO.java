@@ -2,23 +2,25 @@ package com.poslovna.controller.dto;
 
 public class CityDTO {
 	
+	public CityDTO(String name, String code, String countryS, String postNum) {
+		super();
+		this.name = name;
+		this.code = code;
+		this.countryS = countryS;
+		this.postNum = postNum;
+	}
+
 	public CityDTO() {
 		
 	}
 	
-	public CityDTO(String name, String code, String country, String postNum) {
-		
-		this.name = name;
-		this.code = code;
-		this.country = country;
-		this.postNum = postNum;
-	}
+	
 
 	private String name;
 	
 	private String code;
 	
-	private String country;
+	private String countryS;
 	
 	private String postNum;
 
@@ -38,13 +40,7 @@ public class CityDTO {
 		this.code = code;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
+	
 
 	public String getPostNum() {
 		return postNum;
@@ -52,6 +48,14 @@ public class CityDTO {
 
 	public void setPostNum(String postNum) {
 		this.postNum = postNum;
+	}
+
+	public String getCountryS() {
+		return countryS;
+	}
+
+	public void setCountryS(String countryS) {
+		this.countryS = countryS;
 	}
 
 }

@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.poslovna.model.City;
 import com.poslovna.model.Country;
+import com.poslovna.repository.CityRepository;
 import com.poslovna.repository.CountryRepository;
 
 @Service
@@ -12,6 +15,9 @@ public class CountryService {
 	
 	@Autowired
 	private CountryRepository countryRepository;
+	
+	@Autowired
+	private CityRepository cityRepository;
 	
 	public List<Country> getAllCountries(){
 		
@@ -67,13 +73,23 @@ public class CountryService {
 	public Country delete(Long id) {
 		
 		Country c = countryRepository.findByIdEquals(id);
+		
+		
+		
+		
 		if(c!=null) {
-	
-		countryRepository.delete(c);
-		
+			
+			List<City> cities = cityRepository.findByCountry_idEquals(id);
+			
+			if(cities.size() ==0) {
+			
+				
+				countryRepository.delete(c);
+				return c;
+			}
 		}
+		return null;
 		
-		return c;
 	}
 	
 	public List<Country> searchCounty(Country country){
