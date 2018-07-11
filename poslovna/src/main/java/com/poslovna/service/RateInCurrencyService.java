@@ -13,12 +13,6 @@ import com.poslovna.repository.CurrencyRepository;
 import com.poslovna.repository.ExchangeRateRepository;
 import com.poslovna.repository.RateInCurrencyRepository;
 
-import poslovna_banka.model.ExchangeRateInCurrency;
-
-
-
-
-
 
 @Service
 public class RateInCurrencyService {
