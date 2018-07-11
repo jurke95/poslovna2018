@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poslovna.controller.dto.LegalEntityDTO;
+import com.poslovna.model.Individual;
 import com.poslovna.model.LegalEntity;
 import com.poslovna.service.LegalEntityService;
 
@@ -26,9 +29,9 @@ public class LegalEntityController {
 	private LegalEntityService legalEntityService;
 	
 	@PostMapping("/addLegEntity")
-	public ResponseEntity<LegalEntity> addNewLegalEntity(@RequestBody LegalEntity legEnt){
+	public ResponseEntity<LegalEntity> addNewLegalEntity(@RequestBody LegalEntityDTO legEntdto){
 		
-		LegalEntity legalEntity = legalEntityService.addLegalEntity(legEnt);
+		LegalEntity legalEntity = legalEntityService.addLegalEntity(legEntdto);
 		
 		if(legalEntity==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -74,4 +77,30 @@ public class LegalEntityController {
 		return new ResponseEntity<>(legEntities, HttpStatus.OK);
 	}
 
+	
+	@PutMapping("/editlegalentity")
+	public ResponseEntity<LegalEntity> editlegalentity(@RequestBody LegalEntityDTO legaldto){
+		
+		LegalEntity legEntities = legalEntityService.editLegalEntity(legaldto);
+		
+		if(legEntities==null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		return new ResponseEntity<>(legEntities, HttpStatus.OK);
+	}
+	
+	
+	@GetMapping("/findlegalofbank/{idlegal}/{idbank}")
+	public ResponseEntity<LegalEntity> findlegalofbank(@PathVariable Long idlegal,@PathVariable Long idbank ){
+		
+		LegalEntity legalentity = legalEntityService.findLegalEntityOBank(idlegal, idbank);
+		
+		if(legalentity!=null) {
+			return new ResponseEntity<>(legalentity,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+	
+	
 }
