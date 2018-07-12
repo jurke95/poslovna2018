@@ -41,12 +41,12 @@ INSERT INTO `poslovna`.`currency` (`password`, `name`,`domicile`, `country_id`) 
 INSERT INTO `poslovna`.`currency` (`password`, `name`,`domicile`, `country_id`) VALUES ('RUB','Rublja',1,'4');
 
 
-INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `individual_id`) VALUES ('778111111111111192',1,'2018-02-20','2','1','1');
-INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `individual_id`) VALUES ('778222222222222292',1,'2018-03-01','2','2','2');
-INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `individual_id`) VALUES ('778333333333333392',1,'2018-06-30','2','3','3');
-INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778444444444444492',1,'2018-01-10','2','1','1');
-INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778555555555555592',1,'2018-01-21','2','2','2');
-INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778666666666666692',1,'2018-07-02','2','3','3');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `individual_id`) VALUES ('778-1111111111111-92',1,'2018-02-20','2','1','1');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `individual_id`) VALUES ('778-2222222222222-92',1,'2018-03-01','2','2','2');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `individual_id`) VALUES ('778-3333333333333-92',1,'2018-06-30','2','3','3');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-4444444444444-92',1,'2018-01-10','2','1','1');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-5555555555555-92',1,'2018-01-21','2','2','2');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-6666666666666-92',1,'2018-07-02','2','3','3');
 
 
 

@@ -23,7 +23,7 @@ public class Account implements Serializable {
 	private Long id;
 	
 
-	@Column(columnDefinition="VARCHAR(18)")
+	@Column(columnDefinition="VARCHAR(20)")
 	private String accountnum;
 	
 	private String openingdate;

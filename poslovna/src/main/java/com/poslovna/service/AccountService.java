@@ -50,15 +50,18 @@ public class AccountService {
 		
 		Account account = new Account();
 		List<Account> listaAccounts = accountRepository.findAll();
-		for(Account acc: listaAccounts) {
-			if(acc.getAccountnum().equals(accountdto.getAccountnum())) {
-				return account;
-			}
-		}
+		
 		if(accountdto!=null) {
 			Bank bank = bankRepository.findByIdEquals(accountdto.getBankid());
 			String code = bank.getCode();
-			account.setAccountnum(code + accountdto.getAccountnum());
+			
+			for(Account acc: listaAccounts) {
+				if(acc.getAccountnum().equals(code + accountdto.getAccountnum())) {
+					return account;
+				}
+			}
+			
+			account.setAccountnum(code + "-" + accountdto.getAccountnum());
 			account.setBank(bankRepository.findByIdEquals(accountdto.getBankid()));
 			account.setCurrency(currencyRepository.findOneById(accountdto.getCurrencyid()));
 			account.setIndividual(individualRepositroy.findByIdEquals(accountdto.getIndividualid()));
