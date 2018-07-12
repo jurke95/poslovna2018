@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -106,16 +107,16 @@ public class StatementAnalysisService {
 		if (sa.getType().equals("Nalog za isplatu")) {
 			Account debtorAccount = accountRepository.findOneById(sa.getDebtorAccount().getId());
 			DailyAccountBalance dailyAccountBalance = dabRepository
-					.findOneByDateAndBankAccount(sa.getDateCurrency(), debtorAccount);
+					.findOneByDateAndBankaccount(sa.getDateCurrency(), debtorAccount);
 
 			if (dailyAccountBalance == null) {
 
-				ArrayList<DailyAccountBalance> states = dabRepository.findAllByBankAccount(debtorAccount);
+				List<DailyAccountBalance> states = dabRepository.findByBankaccount_idEquals(debtorAccount.getBank().getId());
 				System.out.println(states.size());
 				if (states == null) {
 					throw new IllegalArgumentException("Ne postoji dovoljno novca da bi se isplatilo !");
 				} else {
-				
+					
 					DailyAccountBalance max = states.get(0);
 					System.out.println(max+"aaaaaaaa");
 					SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -132,15 +133,14 @@ public class StatementAnalysisService {
 					}
 
 					DailyAccountBalance dailyAccountBalanceNew = new DailyAccountBalance();
-					dailyAccountBalanceNew.setBankAccount(debtorAccount);
+					dailyAccountBalanceNew.setBankaccount(debtorAccount);
 					dailyAccountBalanceNew.setPreviousState(max.getNewState());
 					dailyAccountBalanceNew.setNewState(0.0);
 					dailyAccountBalanceNew.setPaymentTo(0.0);
+					dailyAccountBalanceNew.setPaymentFrom(0.0);
 					dailyAccountBalanceNew.setDate(sa.getDateCurrency());
 					dabRepository.save(dailyAccountBalanceNew);
-					System.out.println(dailyAccountBalanceNew.getPaymentFrom()+"eeeeeeeee");
-					System.out.println(sa.getSum());
-					dailyAccountBalanceNew.setPaymentFrom(dailyAccountBalanceNew.getPaymentFrom() + sa.getSum());
+					dailyAccountBalanceNew.setPaymentFrom(dailyAccountBalanceNew.getPaymentFrom() + sa.getAmount());
 					dailyAccountBalanceNew.setNewState(dailyAccountBalanceNew.getPreviousState()
 							+ dailyAccountBalanceNew.getPaymentTo() - dailyAccountBalanceNew.getPaymentFrom());
 
@@ -187,12 +187,12 @@ public class StatementAnalysisService {
 				Account debtorAccount = accountRepository.findOneById(a.getDebtorAccount().getId());
 				Account creditorAccount = accountRepository.findOneById(a.getAccountCreditor().getId());
 				DailyAccountBalance dailyAccountBalance = dabRepository
-						.findOneByDateAndBankAccount(a.getDateOfReceipt(), debtorAccount);
+						.findOneByDateAndBankaccount(a.getDateOfReceipt(), debtorAccount);
 				DailyAccountBalance dailyAccountBalanceCreditor = dabRepository
-						.findOneByDateAndBankAccount(a.getDateOfReceipt(), creditorAccount);
+						.findOneByDateAndBankaccount(a.getDateOfReceipt(), creditorAccount);
 
 				if (dailyAccountBalance == null) {
-					ArrayList<DailyAccountBalance> balances = dabRepository.findAllByBankAccount(debtorAccount);
+					List<DailyAccountBalance> balances =  dabRepository.findByBankaccount_idEquals(debtorAccount.getBank().getId());
 					
 					if (balances == null) {
 						throw new IllegalArgumentException("Nema dovoljno sredstava za naplatu");
@@ -215,7 +215,7 @@ public class StatementAnalysisService {
 
 						DailyAccountBalance dailyAccountBalanceDebtor = new DailyAccountBalance();
 					
-						dailyAccountBalanceDebtor.setBankAccount(debtorAccount);
+						dailyAccountBalanceDebtor.setBankaccount(debtorAccount);
 						dailyAccountBalanceDebtor.setPreviousState(max.getNewState());
 						dailyAccountBalanceDebtor.setNewState(0.0);
 						dailyAccountBalanceDebtor.setPaymentFrom(0.0);
@@ -255,7 +255,7 @@ public class StatementAnalysisService {
 				}
 
 				if (dailyAccountBalanceCreditor == null) {
-					ArrayList<DailyAccountBalance> states = dabRepository.findAllByBankAccount(creditorAccount);
+					List<DailyAccountBalance> states =  dabRepository.findByBankaccount_idEquals(debtorAccount.getBank().getId());
 				
 					if (states.size() != 0) {
 						DailyAccountBalance max = states.get(0);
@@ -275,7 +275,7 @@ public class StatementAnalysisService {
 
 						DailyAccountBalance dailyAccountStateCred = new DailyAccountBalance();
 						// setovanje dailyState za poverioca
-						dailyAccountStateCred.setBankAccount(creditorAccount);
+						dailyAccountStateCred.setBankaccount(creditorAccount);
 						dailyAccountStateCred.setPreviousState(max.getNewState());
 						dailyAccountStateCred.setNewState(0.0);
 						dailyAccountStateCred.setPaymentFrom(0.0);
@@ -295,7 +295,7 @@ public class StatementAnalysisService {
 					} else {
 						DailyAccountBalance dailyAccountStateNewCreditor = new DailyAccountBalance();
 					
-						dailyAccountStateNewCreditor.setBankAccount(creditorAccount);
+						dailyAccountStateNewCreditor.setBankaccount(creditorAccount);
 						dailyAccountStateNewCreditor.setPreviousState(0.0);
 						dailyAccountStateNewCreditor.setNewState(0.0);
 						dailyAccountStateNewCreditor.setPaymentFrom(0.0);
