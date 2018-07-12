@@ -63,7 +63,9 @@ public class StatementAnalysisService {
 	    s.setDebtorOrderer(xml.getDebtorOrderer());
 	    s.setModelApproval(xml.getModelApproval());
 	    s.setModelOfIndebtedness(xml.getModelOfIndebtedness());
+	    
 	    s.setPaymentCurrency(currencyRepository.findOneByPassword(xml.getPaymentCurrencyXML()));
+	    
 	    s.setPurposeOfPayment(xml.getPurposeOfPayment());
 	    s.setPaymentType(typesOfPaymentsRepository.findOneByCode(xml.getPaymentTypeXML()));
 	    s.setReferenceNumberCreditor(xml.getReferenceNumberCreditor());

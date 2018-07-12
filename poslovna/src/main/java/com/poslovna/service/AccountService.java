@@ -49,15 +49,26 @@ public class AccountService {
 	public Account addIndividualAccount(AccountDTO accountdto) {
 		
 		Account account = new Account();
+		List<Account> listaAccounts = accountRepository.findAll();
+		
 		if(accountdto!=null) {
-			account.setAccountnum(accountdto.getAccountnum());
+			Bank bank = bankRepository.findByIdEquals(accountdto.getBankid());
+			String code = bank.getCode();
+			
+			for(Account acc: listaAccounts) {
+				if(acc.getAccountnum().equals(code + accountdto.getAccountnum())) {
+					return account;
+				}
+			}
+			
+			account.setAccountnum(code + "-" + accountdto.getAccountnum());
 			account.setBank(bankRepository.findByIdEquals(accountdto.getBankid()));
 			account.setCurrency(currencyRepository.findOneById(accountdto.getCurrencyid()));
 			account.setIndividual(individualRepositroy.findByIdEquals(accountdto.getIndividualid()));
 			account.setLegalEntity(null);
 			account.setIsValid(true);
 			Date date = new Date();
-			Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 			String s = formatter.format(date);
 			account.setOpeningdate(s);
 			accountRepository.save(account);
@@ -117,7 +128,9 @@ public class AccountService {
 		List<Account> listAccoount = accountRepository.findAll();
 		List<Account> retList = new ArrayList<>();
 		for(Account acc : listAccoount) {
+			
 			if(acc.getBank().getId()==id && acc.getIndividual()!=null) {
+				
 				retList.add(acc);
 			}
 		}
@@ -169,6 +182,14 @@ public class AccountService {
 		}
 		
 		return retList;
+	}
+	
+	
+	public List<Account> findAccount(AccountDTO accountdto) {
+		
+		return accountRepository.findByAccountnumEquals(accountdto.getAccountnum());
+		
+		
 	}
 	
 	
