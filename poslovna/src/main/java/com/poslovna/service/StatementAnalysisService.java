@@ -111,16 +111,16 @@ public class StatementAnalysisService {
 			if (dailyAccountBalance == null) {
 
 				ArrayList<DailyAccountBalance> states = dabRepository.findAllByBankAccount(debtorAccount);
-				
+				System.out.println(states.size());
 				if (states == null) {
-					throw new IllegalArgumentException("Ne posotoji dovoljno novca da bi se isplatilo !");
+					throw new IllegalArgumentException("Ne postoji dovoljno novca da bi se isplatilo !");
 				} else {
 				
 					DailyAccountBalance max = states.get(0);
-
+					System.out.println(max+"aaaaaaaa");
 					SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
 					java.util.Date maxDate = date.parse(states.get(0).getDate());
-
+					System.out.println(maxDate+"bbbbbbbbb");
 					java.util.Date fromDate = date.parse(sa.getDateCurrency());
 
 					for (int i = 1; i < states.size(); i++) {
@@ -138,7 +138,8 @@ public class StatementAnalysisService {
 					dailyAccountBalanceNew.setPaymentTo(0.0);
 					dailyAccountBalanceNew.setDate(sa.getDateCurrency());
 					dabRepository.save(dailyAccountBalanceNew);
-
+					System.out.println(dailyAccountBalanceNew.getPaymentFrom()+"eeeeeeeee");
+					System.out.println(sa.getSum());
 					dailyAccountBalanceNew.setPaymentFrom(dailyAccountBalanceNew.getPaymentFrom() + sa.getSum());
 					dailyAccountBalanceNew.setNewState(dailyAccountBalanceNew.getPreviousState()
 							+ dailyAccountBalanceNew.getPaymentTo() - dailyAccountBalanceNew.getPaymentFrom());
@@ -153,7 +154,7 @@ public class StatementAnalysisService {
 
 				if (sa.getSum() > dailyAccountBalance.getNewState()) {
 
-					throw new IllegalArgumentException("Ne posotoji dovoljno novca za isplatu !");
+					throw new IllegalArgumentException("Ne postoji dovoljno novca za isplatu !");
 
 				}
 				dailyAccountBalance.setPaymentFrom(dailyAccountBalance.getPaymentFrom() + sa.getSum());

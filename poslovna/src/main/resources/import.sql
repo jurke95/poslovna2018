@@ -48,6 +48,7 @@ INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_
 INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-5555555555555-92',1,'2018-01-21','2','2','2');
 INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-6666666666666-92',1,'2018-07-02','2','3','3');
 
+INSERT INTO `poslovna`.`daily_account_balance` (`date`, `new_state`,`payment_from`, `payment_to`, `previous_state`, `bank_account_id`) VALUES ('2018-05-18', 50000.0, 0.0, 0.0, 50000.00, '2');
 
 
 
