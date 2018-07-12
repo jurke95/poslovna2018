@@ -99,4 +99,12 @@ public class IndividualService {
 	}
 	
 	
+	public Individual findIndividualJmbgOfBank(IndividualDTO indidto) {
+		
+		Individual individual = individualRepositroy.findByJmbgEqualsAndBank_idEquals(indidto.getJmbg(), indidto.getBankId());
+		
+		
+		return individual;
+	}
+	
 }
