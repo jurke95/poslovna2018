@@ -17,6 +17,8 @@ import com.poslovna.service.StatementAnalysisService;
 
 
 
+
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/analysis")
@@ -30,7 +32,7 @@ public class StatementAnalysisController {
 	@GetMapping("/payoff/{fileName}")
 	public  StatementAnalysis loadXML(@PathVariable String fileName) throws JAXBException {
 		File file = new File("filesxml\\" + fileName + ".xml");
-		return  saService.getAnalyticsOfStatements(file);
+		return  saService.getStatementAnalysis(file);
 	}
 
 	// cuvanje naloga za isplatu
@@ -39,5 +41,33 @@ public class StatementAnalysisController {
 		File file = new File("filesxml\\" + fileName + ".xml");
 		return saService.saveStatementAnalysis(file);
 	}
+	
+	// cuvanje naloga za naplatu
+	@GetMapping("/save/payment/{fileName}")
+	public StatementAnalysis saveStatementAnalysisPayment (@PathVariable String fileName) throws JAXBException, ParseException {
+		File file = new File("filesxml\\" + fileName + ".xml");
+			return saService.saveStatementAnalysisForPayment(file);
+	}
+    //ucitavanje naloga za naplatu
+	@GetMapping("payment/{fileName}")
+	public StatementAnalysis loadXMLPayment(@PathVariable String fileName) throws JAXBException {
+		File file = new File("filesxml\\" + fileName + ".xml");
+		return saService.getStatementAnalysisPayment(file);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
