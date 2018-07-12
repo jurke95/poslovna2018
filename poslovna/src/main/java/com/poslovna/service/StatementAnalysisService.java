@@ -43,7 +43,7 @@ public class StatementAnalysisService {
 	private TypesOfPaymentsRepository typesOfPaymentsRepository;
 	
 	
-	
+	//generisanje naloga za isplatu
 	private StatementAnalysis generateStatementAnalysis(StatementAnalysis xml) {
 		StatementAnalysis s = new StatementAnalysis();
 		s.setCity(cityRepository.findOneByName(xml.getCityXML()));
@@ -76,7 +76,7 @@ public class StatementAnalysisService {
 
 	
 	
-
+   //ucitavanje naloga za isplatu
 	public StatementAnalysis getAnalyticsOfStatements(File file) throws JAXBException {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(StatementAnalysis.class);
@@ -87,7 +87,7 @@ public class StatementAnalysisService {
 
 	}
 	
-	
+	// cuvanje naloga za isplatu
 	public StatementAnalysis saveStatementAnalysis(File file) throws JAXBException, ParseException {
 
 		JAXBContext jaxbContext = JAXBContext.newInstance(StatementAnalysis.class);
