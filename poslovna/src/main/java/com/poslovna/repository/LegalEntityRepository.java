@@ -14,4 +14,5 @@ public interface LegalEntityRepository extends JpaRepository<LegalEntity, Long>{
 	
 	List<LegalEntity> findByBank_idEquals(Long id);
 	
+	LegalEntity findByJmbgEqualsAndBank_idEquals(String jmbg,Long id);
 }

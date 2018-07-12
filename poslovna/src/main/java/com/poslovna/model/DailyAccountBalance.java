@@ -18,7 +18,7 @@ public class DailyAccountBalance implements Serializable {
 	}
 	
 	public DailyAccountBalance(Long id, String date, Double previousState, Double newState, Double paymentTo,
-			Double paymentFrom, Account bankAccount) {
+			Double paymentFrom, Account bankaccount) {
 		
 		this.id = id;
 		this.date = date;
@@ -26,7 +26,7 @@ public class DailyAccountBalance implements Serializable {
 		this.newState = newState;
 		this.paymentTo = paymentTo;
 		this.paymentFrom = paymentFrom;
-		this.bankAccount = bankAccount;
+		this.bankaccount = bankaccount;
 	}
 
 	@Id
@@ -48,7 +48,7 @@ public class DailyAccountBalance implements Serializable {
 	private Double paymentFrom;
 	
 	@ManyToOne
-	private Account bankAccount;
+	private Account bankaccount;
 
 	public Long getId() {
 		return id;
@@ -98,12 +98,12 @@ public class DailyAccountBalance implements Serializable {
 		this.paymentFrom = paymentFrom;
 	}
 
-	public Account getBankAccount() {
-		return bankAccount;
+	public Account getBankaccount() {
+		return bankaccount;
 	}
 
-	public void setBankAccount(Account bankAccount) {
-		this.bankAccount = bankAccount;
+	public void setBankaccount(Account bankaccount) {
+		this.bankaccount = bankaccount;
 	}
 	
 }

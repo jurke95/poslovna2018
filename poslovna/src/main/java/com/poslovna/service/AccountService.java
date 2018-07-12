@@ -56,12 +56,12 @@ public class AccountService {
 			String code = bank.getCode();
 			
 			for(Account acc: listaAccounts) {
-				if(acc.getAccountnum().equals(code + accountdto.getAccountnum())) {
+				if(acc.getAccountnum().equals(code + "-" + accountdto.getAccountnum() + "-92")) {
 					return account;
 				}
 			}
 			
-			account.setAccountnum(code + "-" + accountdto.getAccountnum());
+			account.setAccountnum(code + "-" + accountdto.getAccountnum() + "-92");
 			account.setBank(bankRepository.findByIdEquals(accountdto.getBankid()));
 			account.setCurrency(currencyRepository.findOneById(accountdto.getCurrencyid()));
 			account.setIndividual(individualRepositroy.findByIdEquals(accountdto.getIndividualid()));
@@ -79,16 +79,28 @@ public class AccountService {
 	
 	public Account addLegalAccount(AccountDTO accountdto) {
 		
+		List<Account> listaAccounts = accountRepository.findAll();
 		Account account = new Account();
 		if(accountdto!=null) {
-			account.setAccountnum(accountdto.getAccountnum());
+			
+			Bank bank = bankRepository.findByIdEquals(accountdto.getBankid());
+			String code = bank.getCode();
+			
+			for(Account acc: listaAccounts) {
+				if(acc.getAccountnum().equals(code + "-" + accountdto.getAccountnum() + "-92")) {
+					return account;
+				}
+			}
+			
+			
+			account.setAccountnum(code + "-" + accountdto.getAccountnum() + "-92");
 			account.setBank(bankRepository.findByIdEquals(accountdto.getBankid()));
 			account.setCurrency(currencyRepository.findOneById(accountdto.getCurrencyid()));
 			account.setIndividual(null);
 			account.setLegalEntity(legalEntityRepository.findByIdEquals(accountdto.getLegalEntityid()));
 			account.setIsValid(true);
 			Date date = new Date();
-			Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd");
 			String s = formatter.format(date);
 			account.setOpeningdate(s);
 			accountRepository.save(account);
