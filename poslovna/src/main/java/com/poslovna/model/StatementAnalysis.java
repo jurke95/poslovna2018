@@ -17,18 +17,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "statementAnalysis")
 public class StatementAnalysis implements Serializable{
 	
-	public StatementAnalysis() {
-		
-	}
-	
 	public StatementAnalysis(Long id, String type, String debtorOrderer, String purposeOfPayment,
 			String creditorReceiver, String dateOfReceipt, String dateCurrency, Double amount, String debtorAccountXML,
 			Integer modelOfIndebtedness, String referenceNumberOfIndebtedness, Boolean urgent, Integer typeOfError,
-			String status, String paymentTypeXML, String paymentCurrencyXML, String cityXML, Account debtorAccount,
-			String accountCreditorXML, Account accountCreditor, Integer modelApproval, String referenceNumberCreditor,
-			Long itemNumber, City city, Currency paymentCurrency, DailyAccountBalance dailyAccountBalance,
-			TypesOfPayments paymentType,Double sum) {
-		
+			String status, String paymentTypeXML, String paymentCurrencyXML, String cityXML, String code,
+			Account debtorAccount, String accountCreditorXML, Account accountCreditor, Integer modelApproval,
+			String referenceNumberCreditor, Long itemNumber, City city, Currency paymentCurrency,
+			DailyAccountBalance dailyAccountBalance, TypesOfPayments paymentType, Double sum) {
+		super();
 		this.id = id;
 		this.type = type;
 		this.debtorOrderer = debtorOrderer;
@@ -46,6 +42,7 @@ public class StatementAnalysis implements Serializable{
 		this.paymentTypeXML = paymentTypeXML;
 		this.paymentCurrencyXML = paymentCurrencyXML;
 		this.cityXML = cityXML;
+		this.code = code;
 		this.debtorAccount = debtorAccount;
 		this.accountCreditorXML = accountCreditorXML;
 		this.accountCreditor = accountCreditor;
@@ -56,9 +53,14 @@ public class StatementAnalysis implements Serializable{
 		this.paymentCurrency = paymentCurrency;
 		this.dailyAccountBalance = dailyAccountBalance;
 		this.paymentType = paymentType;
-		this.sum=sum;
+		this.sum = sum;
 	}
 
+	public StatementAnalysis() {
+		
+	}
+	
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
@@ -108,6 +110,8 @@ public class StatementAnalysis implements Serializable{
 	
 	@Transient
 	private String cityXML;
+	
+	private String code;
 	
 	
 	//------------------OVO IZNAD IDE NA NALOG ZA ISPLATU------------------
@@ -367,6 +371,14 @@ public class StatementAnalysis implements Serializable{
 
 	public void setSum(Double sum) {
 		this.sum = sum;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 	
 	

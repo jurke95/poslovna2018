@@ -2,18 +2,18 @@
 <statementAnalysis>
     <type>Nalog za isplatu</type>
     <debtorOrderer>NN d.o.o</debtorOrderer>
-    <purposeOfPayment>Isplata zarade 01/2018</purposeOfPayment>
-    <creditorReceiver>Dragan Dulic, blagajnik</creditorReceiver>
-    <dateOfReceipt>2018-06-22</dateOfReceipt>
-    <dateCurrency>2018-06-22</dateCurrency>
-    <amount>9550</amount>
-    <debtorAccountXML>1234567891234</debtorAccountXML>
+    <purposeOfPayment>Isplata zarade 06/2018</purposeOfPayment>
+    <creditorReceiver>Marko Juric, blagajnik</creditorReceiver>
+    <dateOfReceipt>2018-06-15</dateOfReceipt>
+    <dateCurrency>2018-06-15</dateCurrency>
+    <amount>7200</amount>
+    <debtorAccountXML>998222222222222292</debtorAccountXML>
     <modelOfIndebtedness>97</modelOfIndebtedness>
     <referenceNumberOfIndebtedness>BOP</referenceNumberOfIndebtedness>
     <urgent>false</urgent>
     <typeOfError>1</typeOfError>
     <status></status>
     <paymentTypeXML>1</paymentTypeXML>
-    <paymentCurrencyXML>RSD</paymentCurrencyXML>
+    <paymentCurrencyXML>DIN</paymentCurrencyXML>
     <cityXML>Novi Sad</cityXML> 
 </statementAnalysis>

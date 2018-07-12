@@ -29,8 +29,12 @@ public class StatementAnalysisController {
 	// ucitavanje naloga za isplatu
 	@GetMapping("/payoff/{fileName}")
 	public  StatementAnalysis loadXML(@PathVariable String fileName) throws JAXBException {
+		
 		File file = new File("filesxml\\" + fileName + ".xml");
-		return  saService.getAnalyticsOfStatements(file);
+		
+		StatementAnalysis sa = saService.getAnalyticsOfStatements(file);
+		
+		return  sa;
 	}
 
 	// cuvanje naloga za isplatu
