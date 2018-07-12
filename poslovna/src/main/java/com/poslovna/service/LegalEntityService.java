@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.poslovna.controller.dto.IndividualDTO;
 import com.poslovna.controller.dto.LegalEntityDTO;
 import com.poslovna.model.Bank;
 import com.poslovna.model.Individual;
@@ -123,6 +124,16 @@ public class LegalEntityService {
 		
 		
 		return null;
+	}
+	
+	
+	
+	public LegalEntity findLegalJmbgOfBank(IndividualDTO indidto) {
+		
+		LegalEntity legalentity = legalEntRepository.findByJmbgEqualsAndBank_idEquals(indidto.getJmbg(), indidto.getBankId());
+		
+		
+		return legalentity;
 	}
 	
 	

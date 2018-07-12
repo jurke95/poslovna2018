@@ -52,15 +52,15 @@ public class AccountController {
 	 * @return
 	 */
 	@PostMapping("/addlegalaccount")
-	public ResponseEntity<String> addlegalaccount(@RequestBody AccountDTO accountdto){
+	public ResponseEntity<Account> addlegalaccount(@RequestBody AccountDTO accountdto){
 		
 		Account account = accountService.addLegalAccount(accountdto);
-		
+
 		if(account!=null) {
-			return new ResponseEntity<>("successful",HttpStatus.OK);
+			return new ResponseEntity<>(account,HttpStatus.OK);
 		}
 		
-		return new ResponseEntity<>("unsuccessful",HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
 	

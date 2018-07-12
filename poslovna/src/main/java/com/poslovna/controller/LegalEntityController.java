@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.poslovna.controller.dto.IndividualDTO;
 import com.poslovna.controller.dto.LegalEntityDTO;
 import com.poslovna.model.Individual;
 import com.poslovna.model.LegalEntity;
@@ -102,5 +103,15 @@ public class LegalEntityController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
+	@PutMapping("/findlegaljmbgofbank")
+	public ResponseEntity<LegalEntity> findindividualjmbgofbank(@RequestBody IndividualDTO indi){
+		
+		LegalEntity legalEntity = legalEntityService.findLegalJmbgOfBank(indi);
+		
+		if(legalEntity!=null) {
+			return new ResponseEntity<>(legalEntity,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 	
 }
