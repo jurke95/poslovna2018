@@ -96,6 +96,15 @@ public class IndividualController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	
+	@PutMapping("/findindividualjmbgofbank")
+	public ResponseEntity<Individual> findindividualjmbgofbank(@RequestBody IndividualDTO indi){
+		
+		Individual individual = individualService.findIndividualJmbgOfBank(indi);
+		
+		if(individual!=null) {
+			return new ResponseEntity<>(individual,HttpStatus.OK);
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
 	
 }

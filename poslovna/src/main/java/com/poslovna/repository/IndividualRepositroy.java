@@ -13,4 +13,6 @@ public interface IndividualRepositroy extends JpaRepository<Individual, Long> {
 	Individual findByIdEquals(Long id);
 	
 	List<Individual> findByBank_idEquals(Long id);
+	
+	Individual findByJmbgEqualsAndBank_idEquals(String jmbg,Long id);
 }
