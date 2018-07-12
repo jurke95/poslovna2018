@@ -55,8 +55,9 @@ public ExchangeRate newExchangeRate(ExchangeRateDTO exchangeRateDTO) throws Pars
 	
 	List<ExchangeRate> exr = this.getAllExchangeRatesByBank(exchangeRateDTO.getIdbank());
 	
-	int size = exr.size();	
-	exchangeRate.setNumber(size+1);
+	int num = Integer.parseInt(exchangeRateDTO.getNumberExchangeRate());
+	exchangeRate.setNumber(num);
+	exchangeRate.setNumberExchangeRate(exchangeRateDTO.getNumberExchangeRate());
 	
 	Date date = new Date();
 	String modifiedDate= new SimpleDateFormat("yyyy-MM-dd").format(date);
