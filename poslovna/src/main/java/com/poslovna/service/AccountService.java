@@ -1,5 +1,7 @@
 package com.poslovna.service;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +57,9 @@ public class AccountService {
 			account.setLegalEntity(null);
 			account.setIsValid(true);
 			Date date = new Date();
-			account.setOpeningdate(date);
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String s = formatter.format(date);
+			account.setOpeningdate(s);
 			accountRepository.save(account);
 		}
 		return account;
@@ -73,7 +77,9 @@ public class AccountService {
 			account.setLegalEntity(legalEntityRepository.findByIdEquals(accountdto.getLegalEntityid()));
 			account.setIsValid(true);
 			Date date = new Date();
-			account.setOpeningdate(date);
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			String s = formatter.format(date);
+			account.setOpeningdate(s);
 			accountRepository.save(account);
 		}
 		return account;

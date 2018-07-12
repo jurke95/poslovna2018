@@ -26,7 +26,7 @@ public class Account implements Serializable {
 	@Column(columnDefinition="VARCHAR(18)")
 	private String accountnum;
 	
-	private Date openingdate;
+	private String openingdate;
 	
 	private Boolean isValid;
 
@@ -58,11 +58,11 @@ public class Account implements Serializable {
 		this.accountnum = accountnum;
 	}
 
-	public Date getOpeningdate() {
+	public String getOpeningdate() {
 		return openingdate;
 	}
 
-	public void setOpeningdate(Date openingdate) {
+	public void setOpeningdate(String openingdate) {
 		this.openingdate = openingdate;
 	}
 
