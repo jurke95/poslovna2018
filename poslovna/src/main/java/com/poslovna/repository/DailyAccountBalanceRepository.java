@@ -15,7 +15,7 @@ public interface DailyAccountBalanceRepository extends JpaRepository<DailyAccoun
 	
 	DailyAccountBalance findOneByDateAndBankaccount(String date, Account bankAccount);
 	List<DailyAccountBalance> findByBankaccount_idEquals(Long id);
-	ArrayList<DailyAccountBalance> findAllByAccount(Account bankAccount);
+	ArrayList<DailyAccountBalance> findAllByBankaccount(Account bankAccount);
 
 
 }

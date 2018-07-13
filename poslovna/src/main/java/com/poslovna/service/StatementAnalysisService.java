@@ -404,7 +404,7 @@ public class StatementAnalysisService {
 						.findOneByDateAndBankaccount(a.getDateOfReceipt(), creditorAccount);
 
 				if (dailyAccountBalance == null) {
-					ArrayList<DailyAccountBalance> balances = dabRepository.findAllByAccount(debtorAccount);
+					ArrayList<DailyAccountBalance> balances = dabRepository.findAllByBankaccount(debtorAccount);
 				
 					if (balances == null) {
 						throw new IllegalArgumentException("Nema dovoljno sredstava za naplatu");
@@ -468,7 +468,7 @@ public class StatementAnalysisService {
 				}
 
 				if (dailyAccountBalanceCreditor == null) {
-					ArrayList<DailyAccountBalance> states = dabRepository.findAllByAccount(creditorAccount);
+					ArrayList<DailyAccountBalance> states = dabRepository.findAllByBankaccount(creditorAccount);
 					
 					if (states.size() != 0) {
 						DailyAccountBalance max = states.get(0);
