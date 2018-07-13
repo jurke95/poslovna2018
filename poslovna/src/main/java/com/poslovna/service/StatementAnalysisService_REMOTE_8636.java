@@ -1,5 +1,3 @@
-
-
 package com.poslovna.service;
 
 import java.io.File;
@@ -756,4 +754,3 @@ public class StatementAnalysisService {
 	
 	
 }
-

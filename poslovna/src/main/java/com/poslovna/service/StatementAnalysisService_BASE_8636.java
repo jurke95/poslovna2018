@@ -1,5 +1,3 @@
-
-
 package com.poslovna.service;
 
 import java.io.File;
@@ -453,7 +451,7 @@ public class StatementAnalysisService {
 						.findOneByDateAndBankaccount(a.getDateOfReceipt(), creditorAccount);
 
 				if (dailyAccountBalance == null) {
-					List<DailyAccountBalance> balances = dabRepository.findByBankaccount_idEquals(debtorAccount.getBank().getId());
+					ArrayList<DailyAccountBalance> balances = dabRepository.findAllByBankaccount(debtorAccount);
 				
 					if (balances == null) {
 						throw new IllegalArgumentException("Nema dovoljno sredstava za naplatu");
@@ -517,7 +515,7 @@ public class StatementAnalysisService {
 				}
 
 				if (dailyAccountBalanceCreditor == null) {
-					List<DailyAccountBalance> states = dabRepository.findByBankaccount_idEquals(creditorAccount.getBank().getId());
+					ArrayList<DailyAccountBalance> states = dabRepository.findAllByBankaccount(creditorAccount);
 					
 					if (states.size() != 0) {
 						DailyAccountBalance max = states.get(0);
@@ -672,7 +670,7 @@ public class StatementAnalysisService {
 				
 				if (dailyAccountState == null) {
 					
-					List<DailyAccountBalance> states = dabRepository.findByBankaccount_idEquals(creditorAccount.getBank().getId());
+					ArrayList<DailyAccountBalance> states = dabRepository.findAllByBankaccount(creditorAccount);
 				
 					if (states == null) {
 						
@@ -756,4 +754,3 @@ public class StatementAnalysisService {
 	
 	
 }
-
