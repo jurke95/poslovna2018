@@ -28,6 +28,8 @@ import com.poslovna.repository.TypesOfPaymentsRepository;
 
 
 
+
+
 @Service
 public class StatementAnalysisService {
 
@@ -362,6 +364,7 @@ public class StatementAnalysisService {
 		    s.setTypeOfError(xml.getTypeOfError());
 		    s.setUrgent(xml.getUrgent());
 		    s.setCode(xml.getCode());
+		    s.setSum(xml.getSum());
 		    
 
 			return s;
@@ -379,7 +382,172 @@ public class StatementAnalysisService {
 			return a;
 		}
 	
-	
+	 // cuvanje naloga za prenos
+		public StatementAnalysis saveStatementAnalysisTransfer(File file) throws JAXBException, ParseException {
+
+			JAXBContext jaxbContext = JAXBContext.newInstance(StatementAnalysis.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			StatementAnalysis xml = (StatementAnalysis) jaxbUnmarshaller.unmarshal(file);
+			StatementAnalysis a = this.generateStatementAnalysisForPayment(xml);
+			saRepository.save(a);
+			
+			if(a.getUrgent()) {
+				
+			}
+
+			if (a.getType().equals("Nalog za prenos")) {
+				Account debtorAccount = accountRepository.findOneById(a.getDebtorAccount().getId());
+				Account creditorAccount = accountRepository.findOneById(a.getAccountCreditor().getId());
+				DailyAccountBalance dailyAccountBalance = dabRepository
+						.findOneByDateAndBankaccount(a.getDateOfReceipt(), debtorAccount);
+				DailyAccountBalance dailyAccountBalanceCreditor = dabRepository
+						.findOneByDateAndBankaccount(a.getDateOfReceipt(), creditorAccount);
+
+				if (dailyAccountBalance == null) {
+					ArrayList<DailyAccountBalance> balances = dabRepository.findAllByAccount(debtorAccount);
+				
+					if (balances == null) {
+						throw new IllegalArgumentException("Nema dovoljno sredstava za naplatu");
+					} else {
+						
+						DailyAccountBalance max = balances.get(0);
+
+						SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+						Date maxDate = date.parse(balances.get(0).getDate());
+
+						Date fromDate = date.parse(a.getDateCurrency());
+
+						for (int i = 1; i < balances.size(); i++) {
+							Date currentDate = date.parse(balances.get(i).getDate());
+
+							if (currentDate.after(maxDate) && currentDate.before(fromDate)) {
+								max = balances.get(i);
+							}
+						}
+
+						DailyAccountBalance dailyAccountBalanceDebtor = new DailyAccountBalance();
+						// setovanje dailyState za duznika
+						dailyAccountBalanceDebtor.setBankaccount(debtorAccount);
+						dailyAccountBalanceDebtor.setPreviousState(max.getNewState());
+						dailyAccountBalanceDebtor.setNewState(0.0);
+						dailyAccountBalanceDebtor.setPaymentFrom(0.0);
+						dailyAccountBalanceDebtor.setPaymentTo(0.0);
+						dailyAccountBalanceDebtor.setDate(a.getDateCurrency());
+						dabRepository.save(dailyAccountBalanceDebtor);
+
+						dailyAccountBalanceDebtor.setPaymentFrom(dailyAccountBalanceDebtor.getPaymentFrom() + a.getSum());
+
+						dailyAccountBalanceDebtor.setNewState(dailyAccountBalanceDebtor.getPreviousState()
+								+ dailyAccountBalanceDebtor.getPaymentTo() - dailyAccountBalanceDebtor.getPaymentFrom());
+
+						dabRepository.save(dailyAccountBalanceDebtor);
+
+						a.setDailyAccountBalance(dailyAccountBalanceDebtor);
+						saRepository.save(a);
+					}
+
+				} else {
+
+					if (a.getSum() > dailyAccountBalance.getNewState()) {
+
+						throw new IllegalArgumentException("Nema dovoljno sredstava  za naplatu");
+
+					}
+					
+			
+					dailyAccountBalance.setPaymentFrom(dailyAccountBalance.getPaymentFrom() + a.getSum());
+					dailyAccountBalance.setNewState(dailyAccountBalance.getPreviousState() + dailyAccountBalance.getPaymentTo()
+							- dailyAccountBalance.getPaymentFrom());
+
+					dabRepository.save(dailyAccountBalance);
+
+			
+					a.setDailyAccountBalance(dailyAccountBalance);
+					saRepository.save(a);
+
+				}
+
+				if (dailyAccountBalanceCreditor == null) {
+					ArrayList<DailyAccountBalance> states = dabRepository.findAllByAccount(creditorAccount);
+					
+					if (states.size() != 0) {
+						DailyAccountBalance max = states.get(0);
+
+						SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+						Date maxDate = date.parse(states.get(0).getDate());
+
+						Date fromDate = date.parse(a.getDateCurrency());
+
+						for (int i = 1; i < states.size(); i++) {
+							Date currentDate = date.parse(states.get(i).getDate());
+
+							if (currentDate.after(maxDate) && currentDate.before(fromDate)) {
+								max = states.get(i);
+							}
+						}
+
+						DailyAccountBalance dailyAccountStateCred = new DailyAccountBalance();
+					
+						dailyAccountStateCred.setBankaccount(creditorAccount);
+						dailyAccountStateCred.setPreviousState(max.getNewState());
+						dailyAccountStateCred.setNewState(0.0);
+						dailyAccountStateCred.setPaymentFrom(0.0);
+						dailyAccountStateCred.setPaymentTo(0.0);
+						dailyAccountStateCred.setDate(a.getDateCurrency());
+						dabRepository.save(dailyAccountStateCred);
+
+						dailyAccountStateCred.setPaymentTo(dailyAccountStateCred.getPaymentTo() + a.getSum());
+
+						dailyAccountStateCred.setNewState(dailyAccountStateCred.getPreviousState()
+								+ dailyAccountStateCred.getPaymentTo() - dailyAccountStateCred.getPaymentFrom());
+
+						dabRepository.save(dailyAccountStateCred);
+
+						a.setDailyAccountBalance(dailyAccountStateCred);
+						saRepository.save(a);
+					} else {
+						DailyAccountBalance dailyAccountStateNewCreditor = new DailyAccountBalance();
+					
+						dailyAccountStateNewCreditor.setBankaccount(creditorAccount);
+						dailyAccountStateNewCreditor.setPreviousState(0.0);
+						dailyAccountStateNewCreditor.setNewState(0.0);
+						dailyAccountStateNewCreditor.setPaymentFrom(0.0);
+						dailyAccountStateNewCreditor.setPaymentTo(0.0);
+						dailyAccountStateNewCreditor.setDate(a.getDateCurrency());
+						dabRepository.save(dailyAccountStateNewCreditor);
+
+						dailyAccountStateNewCreditor.setPaymentTo(dailyAccountStateNewCreditor.getPaymentTo() + a.getSum());
+
+						dailyAccountStateNewCreditor.setNewState(dailyAccountStateNewCreditor.getPreviousState()
+								+ dailyAccountStateNewCreditor.getPaymentTo() - dailyAccountStateNewCreditor.getPaymentFrom());
+
+						dabRepository.save(dailyAccountStateNewCreditor);
+
+						a.setDailyAccountBalance(dailyAccountStateNewCreditor);
+						saRepository.save(a);
+					}
+
+				} else {
+
+				
+
+					dailyAccountBalanceCreditor.setPaymentTo(dailyAccountBalanceCreditor.getPaymentTo() + a.getSum());
+					dailyAccountBalanceCreditor.setNewState(dailyAccountBalanceCreditor.getPreviousState() + dailyAccountBalanceCreditor.getPaymentTo()
+							- dailyAccountBalanceCreditor.getPaymentFrom());
+
+					dabRepository.save(dailyAccountBalanceCreditor);
+
+				
+					a.setDailyAccountBalance(dailyAccountBalanceCreditor);
+					saRepository.save(a);
+
+				}
+
+			}
+
+			return a;
+
+		}
 	
 	
 	

@@ -9,10 +9,13 @@ import org.springframework.stereotype.Repository;
 import com.poslovna.model.Account;
 import com.poslovna.model.DailyAccountBalance;
 
+
 @Repository
 public interface DailyAccountBalanceRepository extends JpaRepository<DailyAccountBalance,Long> {
 	
 	DailyAccountBalance findOneByDateAndBankaccount(String date, Account bankAccount);
 	List<DailyAccountBalance> findByBankaccount_idEquals(Long id);
+	ArrayList<DailyAccountBalance> findAllByAccount(Account bankAccount);
+
 
 }
