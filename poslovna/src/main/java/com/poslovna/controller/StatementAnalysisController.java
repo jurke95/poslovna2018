@@ -19,6 +19,8 @@ import com.poslovna.service.StatementAnalysisService;
 
 
 
+
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/analysis")
@@ -62,7 +64,14 @@ public class StatementAnalysisController {
 	}
 	
 	
-	
+	//ucitavanje naloga za prenos
+		@GetMapping("xml-prenos/{fileName}")
+		public StatementAnalysis loadXMLTransfer(@PathVariable String fileName) throws JAXBException {
+			File file = new File("filesxml\\" + fileName + ".xml");
+			StatementAnalysis analysis = saService.getStatementAnalysisPayment(file);
+			
+			return analysis;
+		}
 	
 	
 	

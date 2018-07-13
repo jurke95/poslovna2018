@@ -50,6 +50,8 @@ public class StatementAnalysisService {
 	@Autowired
 	private TypesOfPaymentsRepository typesOfPaymentsRepository;
 	
+	private final double maxSum= 250000;
+	
 	
 	//generisanje naloga za isplatu
 	private StatementAnalysis generateStatementAnalysis(StatementAnalysis xml) {
