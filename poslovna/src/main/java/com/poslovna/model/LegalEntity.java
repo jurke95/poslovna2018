@@ -17,33 +17,6 @@ import javax.persistence.OneToOne;
 @Entity
 public class LegalEntity {
 
-	public LegalEntity() {
-		
-	}
-	
-	
-	public LegalEntity(Long id, String name, String shortName, String location, String address, String phoneNumber,
-			String fax, String email, String responsiblePerson, Activity activity, String mbr, String jmbg,
-			String taxAuthority, String taxNumber, String deliveryAddress) {
-		
-		this.id = id;
-		this.name = name;
-		this.shortName = shortName;
-		this.location = location;
-		this.address = address;
-		this.phonenumber = phoneNumber;
-		this.fax = fax;
-		this.email = email;
-		this.responsiblePerson = responsiblePerson;
-		this.activity = activity;
-		this.mbr = mbr;
-		this.jmbg = jmbg;
-		this.taxAuthority = taxAuthority;
-		this.taxNumber = taxNumber;
-		this.deliveryAddress = deliveryAddress;
-	}
-
-	
 	
 	
 
@@ -100,9 +73,43 @@ public class LegalEntity {
 	private String pib;
 	*/
 	
+	
+	
+	
 	@Column
 	private String deliveryAddress;
 
+public LegalEntity() {
+		
+	}
+	
+	
+	public LegalEntity(Long id, String name, String shortName, String location, String address, String phoneNumber,
+			String fax, String email, String responsiblePerson, Activity activity, String mbr, String jmbg,
+			String taxAuthority, String taxNumber, String deliveryAddress) {
+		
+		this.id = id;
+		this.name = name;
+		this.shortName = shortName;
+		this.location = location;
+		this.address = address;
+		this.phonenumber = phoneNumber;
+		this.fax = fax;
+		this.email = email;
+		this.responsiblePerson = responsiblePerson;
+		this.activity = activity;
+		this.mbr = mbr;
+		this.jmbg = jmbg;
+		this.taxAuthority = taxAuthority;
+		this.taxNumber = taxNumber;
+		this.deliveryAddress = deliveryAddress;
+	}
+
+	
+	
+	
+	
+	
 	public Long getId() {
 		return id;
 	}

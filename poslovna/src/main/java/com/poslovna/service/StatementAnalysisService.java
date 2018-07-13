@@ -85,9 +85,7 @@ public class StatementAnalysisService {
 	    s.setDebtorOrderer(xml.getDebtorOrderer());
 	    s.setModelApproval(xml.getModelApproval());
 	    s.setModelOfIndebtedness(xml.getModelOfIndebtedness());
-	    
 	    s.setPaymentCurrency(currencyRepository.findOneByPassword(xml.getPaymentCurrencyXML()));
-	    
 	    s.setPurposeOfPayment(xml.getPurposeOfPayment());
 	    s.setPaymentType(typesOfPaymentsRepository.findOneByCode(xml.getPaymentTypeXML()));
 	    s.setReferenceNumberCreditor(xml.getReferenceNumberCreditor());
@@ -114,7 +112,6 @@ public class StatementAnalysisService {
 			a.setCreditorReceiver(xml.getCreditorReceiver());
 			a.setDateOfReceipt(xml.getDateOfReceipt());
 			a.setDateCurrency(xml.getDateCurrency());
-			a.setSum(xml.getSum());
 			a.setAccountCreditor(accountRepository.findOneByAccountnum(xml.getAccountCreditorXML()));
 			a.setModelOfIndebtedness(xml.getModelOfIndebtedness());
 			a.setReferenceNumberOfIndebtedness(xml.getReferenceNumberOfIndebtedness());
@@ -125,6 +122,7 @@ public class StatementAnalysisService {
 			a.setPaymentCurrency(currencyRepository.findOneByPassword(xml.getPaymentCurrencyXML()));
 			a.setCity(cityRepository.findOneByName(xml.getCityXML()));
 			a.setCode(xml.getCode());
+			a.setAmount(xml.getAmount());
 			
 			
 			
@@ -203,12 +201,12 @@ public class StatementAnalysisService {
 
 			} else {
 
-				if (sa.getSum() > dailyAccountBalance.getNewState()) {
+				if (sa.getAmount() > dailyAccountBalance.getNewState()) {
 
 					throw new IllegalArgumentException("Ne postoji dovoljno novca za isplatu !");
 
 				}
-				dailyAccountBalance.setPaymentFrom(dailyAccountBalance.getPaymentFrom() + sa.getSum());
+				dailyAccountBalance.setPaymentFrom(dailyAccountBalance.getPaymentFrom() + sa.getAmount());
 				dailyAccountBalance.setNewState(dailyAccountBalance.getPreviousState() + dailyAccountBalance.getPaymentTo()
 						- dailyAccountBalance.getPaymentFrom());
 
@@ -287,7 +285,7 @@ public class StatementAnalysisService {
 
 				} else {
 
-					if (a.getSum() > dailyAccountBalance.getNewState()) {
+					if (a.getAmount() > dailyAccountBalance.getNewState()) {
 
 						throw new IllegalArgumentException("Nema dovoljno sredstava za naplatu");
 
@@ -413,7 +411,7 @@ public class StatementAnalysisService {
 		    s.setTypeOfError(xml.getTypeOfError());
 		    s.setUrgent(xml.getUrgent());
 		    s.setCode(xml.getCode());
-		    s.setSum(xml.getSum());
+		   
 		    
 
 			return s;
@@ -484,7 +482,7 @@ public class StatementAnalysisService {
 						dailyAccountBalanceDebtor.setDate(a.getDateCurrency());
 						dabRepository.save(dailyAccountBalanceDebtor);
 
-						dailyAccountBalanceDebtor.setPaymentFrom(dailyAccountBalanceDebtor.getPaymentFrom() + a.getSum());
+						dailyAccountBalanceDebtor.setPaymentFrom(dailyAccountBalanceDebtor.getPaymentFrom() + a.getAmount());
 
 						dailyAccountBalanceDebtor.setNewState(dailyAccountBalanceDebtor.getPreviousState()
 								+ dailyAccountBalanceDebtor.getPaymentTo() - dailyAccountBalanceDebtor.getPaymentFrom());
@@ -497,14 +495,14 @@ public class StatementAnalysisService {
 
 				} else {
 
-					if (a.getSum() > dailyAccountBalance.getNewState()) {
+					if (a.getAmount()> dailyAccountBalance.getNewState()) {
 
 						throw new IllegalArgumentException("Nema dovoljno sredstava  za naplatu");
 
 					}
 					
 			
-					dailyAccountBalance.setPaymentFrom(dailyAccountBalance.getPaymentFrom() + a.getSum());
+					dailyAccountBalance.setPaymentFrom(dailyAccountBalance.getPaymentFrom() + a.getAmount());
 					dailyAccountBalance.setNewState(dailyAccountBalance.getPreviousState() + dailyAccountBalance.getPaymentTo()
 							- dailyAccountBalance.getPaymentFrom());
 
@@ -545,7 +543,7 @@ public class StatementAnalysisService {
 						dailyAccountStateCred.setDate(a.getDateCurrency());
 						dabRepository.save(dailyAccountStateCred);
 
-						dailyAccountStateCred.setPaymentTo(dailyAccountStateCred.getPaymentTo() + a.getSum());
+						dailyAccountStateCred.setPaymentTo(dailyAccountStateCred.getPaymentTo() + a.getAmount());
 
 						dailyAccountStateCred.setNewState(dailyAccountStateCred.getPreviousState()
 								+ dailyAccountStateCred.getPaymentTo() - dailyAccountStateCred.getPaymentFrom());
@@ -565,7 +563,7 @@ public class StatementAnalysisService {
 						dailyAccountStateNewCreditor.setDate(a.getDateCurrency());
 						dabRepository.save(dailyAccountStateNewCreditor);
 
-						dailyAccountStateNewCreditor.setPaymentTo(dailyAccountStateNewCreditor.getPaymentTo() + a.getSum());
+						dailyAccountStateNewCreditor.setPaymentTo(dailyAccountStateNewCreditor.getPaymentTo() + a.getAmount());
 
 						dailyAccountStateNewCreditor.setNewState(dailyAccountStateNewCreditor.getPreviousState()
 								+ dailyAccountStateNewCreditor.getPaymentTo() - dailyAccountStateNewCreditor.getPaymentFrom());
@@ -580,7 +578,7 @@ public class StatementAnalysisService {
 
 				
 
-					dailyAccountBalanceCreditor.setPaymentTo(dailyAccountBalanceCreditor.getPaymentTo() + a.getSum());
+					dailyAccountBalanceCreditor.setPaymentTo(dailyAccountBalanceCreditor.getPaymentTo() + a.getAmount());
 					dailyAccountBalanceCreditor.setNewState(dailyAccountBalanceCreditor.getPreviousState() + dailyAccountBalanceCreditor.getPaymentTo()
 							- dailyAccountBalanceCreditor.getPaymentFrom());
 
@@ -606,17 +604,17 @@ public class StatementAnalysisService {
 				return;
 			}
 			
-			if(a.getSum() < maxSum && !a.getUrgent()) {
+			if(a.getAmount() < maxSum && !a.getUrgent()) {
 				Clearing clearing = clearingService.getLastClearingForBank(fromBank.getId(), toBank.getId());
 				if(clearing == null) {
 					List<StatementAnalysis> analytics = new ArrayList<>();
 					analytics.add(a);
-					clearing = new Clearing(fromBank,toBank,a.getPaymentCurrency(), a.getDateCurrency(), analytics, a.getSum());
+					clearing = new Clearing(fromBank,toBank,a.getPaymentCurrency(), a.getDateCurrency(), analytics, a.getAmount());
 				}else {
 					List<StatementAnalysis> analytics = clearing.getPayments();
 					analytics.add(a);
 					double sumAll = clearing.getSumall();
-					sumAll += a.getSum();
+					sumAll += a.getAmount();
 					clearing.setSumall(sumAll);
 					clearing.setPayments(analytics);
 					clearingService.removeClearing(clearing.getId());
@@ -685,7 +683,7 @@ public class StatementAnalysisService {
 						dailyAccountStateNew.setDate(a.getDateCurrency());
 						dabRepository.save(dailyAccountStateNew);
 
-						dailyAccountStateNew.setPaymentTo(dailyAccountStateNew.getPaymentTo() + a.getSum());
+						dailyAccountStateNew.setPaymentTo(dailyAccountStateNew.getPaymentTo() + a.getAmount());
 						dailyAccountStateNew.setNewState(dailyAccountStateNew.getPreviousState()
 								+ dailyAccountStateNew.getPaymentTo() - dailyAccountStateNew.getPaymentFrom());
 
@@ -722,7 +720,7 @@ public class StatementAnalysisService {
 						dailyAccountStateNew.setDate(a.getDateCurrency());
 						dabRepository.save(dailyAccountStateNew);
 
-						dailyAccountStateNew.setPaymentTo(dailyAccountStateNew.getPaymentTo() + a.getSum());
+						dailyAccountStateNew.setPaymentTo(dailyAccountStateNew.getPaymentTo() + a.getAmount());
 						dailyAccountStateNew.setNewState(dailyAccountStateNew.getPreviousState()
 								+ dailyAccountStateNew.getPaymentTo() - dailyAccountStateNew.getPaymentFrom());
 
@@ -735,7 +733,7 @@ public class StatementAnalysisService {
 				}
 				else{
 					
-					dailyAccountState.setPaymentTo(dailyAccountState.getPaymentTo() + a.getSum());
+					dailyAccountState.setPaymentTo(dailyAccountState.getPaymentTo() + a.getAmount());
 					dailyAccountState.setNewState(dailyAccountState.getPreviousState()
 							+ dailyAccountState.getPaymentTo() - dailyAccountState.getPaymentFrom());
 

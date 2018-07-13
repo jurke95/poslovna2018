@@ -57,7 +57,9 @@ public class Bank implements Serializable {
 	
 	
 	
-	
+	public Bank(){
+		
+	}
 
 	public Bank(String code,String pib,String name,String address,
 			String email, String web, String phonenumber, String fax, Boolean bank, String swiftcode,
