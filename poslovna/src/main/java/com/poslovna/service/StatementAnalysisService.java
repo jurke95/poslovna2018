@@ -1,6 +1,7 @@
 package com.poslovna.service;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,13 +10,17 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.poslovna.model.Account;
+import com.poslovna.model.Bank;
+import com.poslovna.model.Clearing;
 import com.poslovna.model.DailyAccountBalance;
+import com.poslovna.model.Rtgs;
 import com.poslovna.model.StatementAnalysis;
 import com.poslovna.repository.AccountRepository;
 import com.poslovna.repository.CityRepository;
@@ -23,6 +28,10 @@ import com.poslovna.repository.CurrencyRepository;
 import com.poslovna.repository.DailyAccountBalanceRepository;
 import com.poslovna.repository.StatementAnalysisRepository;
 import com.poslovna.repository.TypesOfPaymentsRepository;
+
+
+
+
 
 
 
@@ -45,6 +54,12 @@ public class StatementAnalysisService {
 	
 	@Autowired
 	private DailyAccountBalanceRepository dabRepository;
+	
+	@Autowired
+	private ClearingService clearingService;
+	
+	@Autowired
+	private RtgsService rtgsService;
 	
 	
 	@Autowired
@@ -551,9 +566,51 @@ public class StatementAnalysisService {
 
 		}
 	
+		public void generateBankTransfer(StatementAnalysis a ) throws JAXBException {
+			Bank fromBank = a.getAccountCreditor().getBank();
+			Bank toBank = a.getDebtorAccount().getBank();
+			
+			if(fromBank.getId() == toBank.getId() ) {
+				return;
+			}
+			
+			if(a.getSum() < maxSum && !a.getUrgent()) {
+				Clearing clearing = clearingService.getLastClearingForBank(fromBank.getId(), toBank.getId());
+				if(clearing == null) {
+					List<StatementAnalysis> analytics = new ArrayList<>();
+					analytics.add(a);
+					clearing = new Clearing(fromBank,toBank,a.getPaymentCurrency(), a.getDateCurrency(), analytics, a.getSum());
+				}else {
+					List<StatementAnalysis> analytics = clearing.getPayments();
+					analytics.add(a);
+					double sumAll = clearing.getSumall();
+					sumAll += a.getSum();
+					clearing.setSumall(sumAll);
+					clearing.setPayments(analytics);
+					clearingService.removeClearing(clearing.getId());
+				}
+				clearingService.saveClearing(clearing);
+				
+			}else {
+				Rtgs newRtgs = new Rtgs(fromBank, toBank, a);
+				newRtgs = rtgsService.addRtgs(newRtgs);
+				generateXmlRTGS(newRtgs);
+			}
+		
+		}
 	
-	
-	
+		private void generateXmlRTGS(Rtgs rtgs) throws JAXBException {
+			JAXBContext jaxbContext = JAXBContext.newInstance(RtgsXml.class);
+			Marshaller m = jaxbContext.createMarshaller();
+	        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+			File file =new File("filesxml//rtgs//rtgs" +rtgs.getId()+".xml");
+			try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			m.marshal(new RtgsXml(rtgs), file );
+		}
 	
 	
 	

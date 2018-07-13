@@ -21,6 +21,10 @@ import com.poslovna.service.StatementAnalysisService;
 
 
 
+
+
+
+
 @CrossOrigin
 @RestController
 @RequestMapping(value = "/analysis")
@@ -73,8 +77,15 @@ public class StatementAnalysisController {
 			return analysis;
 		}
 	
-	
-	
+		
+		//cuvanje naloga za prenos
+		@GetMapping("/save/xml-transfer/{fileName}")
+		public StatementAnalysis saveAnalyticsTransfer(@PathVariable String fileName) throws JAXBException, ParseException {
+			File file = new File("nalozi\\" + fileName + ".xml");
+			StatementAnalysis analytic = saService.saveStatementAnalysisTransfer(file);
+			saService.generateBankTransfer(analytic);
+			return analytic;
+		}
 	
 	
 	

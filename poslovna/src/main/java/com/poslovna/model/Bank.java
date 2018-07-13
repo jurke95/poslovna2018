@@ -46,6 +46,36 @@ public class Bank implements Serializable {
 	private String fax;
 	
 	private Boolean bank;       // ?????
+	
+	
+	@Column(name = "swift", length = 8)
+	private String swiftcode;
+	
+	
+	@Column(name = "accountnumber", length = 18)
+	private String accountnumber;
+	
+	
+	
+	
+
+	public Bank(String code,String pib,String name,String address,
+			String email, String web, String phonenumber, String fax, Boolean bank, String swiftcode,
+			String accountnumber) {
+		super();
+		
+		this.code = code;
+		this.pib = pib;
+		this.name = name;
+		this.address = address;
+		this.email = email;
+		this.web = web;
+		this.phonenumber = phonenumber;
+		this.fax = fax;
+		this.bank = bank;
+		this.swiftcode = swiftcode;
+		this.accountnumber = accountnumber;
+	}
 
 	public Long getId() {
 		return id;
@@ -125,6 +155,22 @@ public class Bank implements Serializable {
 
 	public void setBank(Boolean bank) {
 		this.bank = bank;
+	}
+
+	public String getSwiftcode() {
+		return swiftcode;
+	}
+
+	public void setSwiftcode(String swiftcode) {
+		this.swiftcode = swiftcode;
+	}
+
+	public String getAccountnumber() {
+		return accountnumber;
+	}
+
+	public void setAccountnumber(String accountnumber) {
+		this.accountnumber = accountnumber;
 	}
 	
 	
