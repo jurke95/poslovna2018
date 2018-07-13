@@ -38,6 +38,8 @@ public class LegalEntityDTO {
 	
 	private Activity activity;
 	
+	private Long activityid;
+	
 	private String mbr;
 	
 	private String jmbg;
@@ -176,6 +178,14 @@ public class LegalEntityDTO {
 
 	public void setDeliveryAddress(String deliveryAddress) {
 		this.deliveryAddress = deliveryAddress;
+	}
+
+	public Long getActivityid() {
+		return activityid;
+	}
+
+	public void setActivityid(Long activityid) {
+		this.activityid = activityid;
 	}
 	
 	

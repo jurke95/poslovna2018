@@ -10,6 +10,7 @@ import com.poslovna.controller.dto.LegalEntityDTO;
 import com.poslovna.model.Bank;
 import com.poslovna.model.Individual;
 import com.poslovna.model.LegalEntity;
+import com.poslovna.repository.ActivityRepository;
 import com.poslovna.repository.BankRepository;
 import com.poslovna.repository.LegalEntityRepository;
 
@@ -21,6 +22,9 @@ public class LegalEntityService {
 	
 	@Autowired
 	private BankRepository bankRepository;
+	
+	@Autowired
+	private ActivityRepository activityRepository;
 	
 	public LegalEntity addLegalEntity(LegalEntityDTO legaldto) {
 
@@ -41,6 +45,7 @@ public class LegalEntityService {
 			legalentity.setDeliveryAddress(legaldto.getDeliveryAddress());
 			legalentity.setPhonenumber(legaldto.getPhonenumber());
 			legalentity.setBank2(bank);
+			legalentity.setActivity(activityRepository.findByIdEquals(legaldto.getActivityid()));
 			legalEntRepository.save(legalentity);
 			
 			return legalentity;
@@ -75,6 +80,7 @@ public class LegalEntityService {
 		
 		List<LegalEntity> legalentity = legalEntRepository.findByBank_idEquals(id);
 		
+
 		return legalentity;
 	}
 	
@@ -113,6 +119,7 @@ public class LegalEntityService {
 				legalentity.setJmbg(legaldto.getJmbg());
 				legalentity.setDeliveryAddress(legaldto.getDeliveryAddress());
 				legalentity.setPhonenumber(legaldto.getPhonenumber());
+				legalentity.setActivity(activityRepository.findByIdEquals(legaldto.getActivityid()));
 				legalEntRepository.save(legalentity);
 				return legalentity;
 			}

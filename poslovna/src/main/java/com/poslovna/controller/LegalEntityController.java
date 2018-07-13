@@ -70,7 +70,7 @@ public class LegalEntityController {
 	public ResponseEntity<List<LegalEntity>> getlegalsofbank(@PathVariable Long id){
 		
 		List<LegalEntity> legEntities = legalEntityService.getAllLegalEntityOfBank(id);
-		
+
 		if(legEntities==null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
