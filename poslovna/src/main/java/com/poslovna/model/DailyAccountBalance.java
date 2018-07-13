@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -48,6 +49,7 @@ public class DailyAccountBalance implements Serializable {
 	private Double paymentFrom;
 	
 	@ManyToOne
+	@JoinColumn(name="bankaccount_id")
 	private Account bankaccount;
 
 	public Long getId() {

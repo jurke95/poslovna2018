@@ -46,7 +46,9 @@ INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_
 INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `individual_id`) VALUES ('778-3333333333333-92',1,'2018-06-30','2','3','3');
 INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-4444444444444-92',1,'2018-01-10','2','1','1');
 INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-5555555555555-92',1,'2018-01-21','2','2','2');
-INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-6666666666666-92',1,'2018-07-02','2','3','3');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-6666666666666-92',0,'2018-07-02','2','3','3');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-8888888888888-92',0,'2018-01-21','2','2','2');
+INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-9999999999999-92',1,'2018-07-02','2','3','3');
 
 INSERT INTO `poslovna`.`daily_account_balance` (`date`, `new_state`,`payment_from`, `payment_to`, `previous_state`, `bankaccount_id`) VALUES ('2018-05-18', 50000.0, 0.0, 0.0, 50000.00, '2');
 
