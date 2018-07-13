@@ -223,7 +223,7 @@ public class StatementAnalysisService {
 						dailyAccountBalanceDebtor.setDate(a.getDateCurrency());
 						dabRepository.save(dailyAccountBalanceDebtor);
 
-						dailyAccountBalanceDebtor.setPaymentFrom(dailyAccountBalanceDebtor.getPaymentFrom() + a.getSum());
+						dailyAccountBalanceDebtor.setPaymentFrom(dailyAccountBalanceDebtor.getPaymentFrom() + a.getAmount());
 
 						dailyAccountBalanceDebtor.setNewState(dailyAccountBalanceDebtor.getPreviousState()
 								+ dailyAccountBalanceDebtor.getPaymentTo() - dailyAccountBalanceDebtor.getPaymentFrom());
@@ -243,7 +243,7 @@ public class StatementAnalysisService {
 					}
 					
 					
-					dailyAccountBalance.setPaymentFrom(dailyAccountBalance.getPaymentFrom() + a.getSum());
+					dailyAccountBalance.setPaymentFrom(dailyAccountBalance.getPaymentFrom() + a.getAmount());
 					dailyAccountBalance.setNewState(dailyAccountBalance.getPreviousState() + dailyAccountBalance.getPaymentTo()
 							- dailyAccountBalance.getPaymentFrom());
 
@@ -283,7 +283,7 @@ public class StatementAnalysisService {
 						dailyAccountStateCred.setDate(a.getDateCurrency());
 						dabRepository.save(dailyAccountStateCred);
 
-						dailyAccountStateCred.setPaymentTo(dailyAccountStateCred.getPaymentTo() + a.getSum());
+						dailyAccountStateCred.setPaymentTo(dailyAccountStateCred.getPaymentTo() + a.getAmount());
 
 						dailyAccountStateCred.setNewState(dailyAccountStateCred.getPreviousState()
 								+ dailyAccountStateCred.getPaymentTo() - dailyAccountStateCred.getPaymentFrom());
@@ -303,7 +303,7 @@ public class StatementAnalysisService {
 						dailyAccountStateNewCreditor.setDate(a.getDateCurrency());
 						dabRepository.save(dailyAccountStateNewCreditor);
 
-						dailyAccountStateNewCreditor.setPaymentTo(dailyAccountStateNewCreditor.getPaymentTo() + a.getSum());
+						dailyAccountStateNewCreditor.setPaymentTo(dailyAccountStateNewCreditor.getPaymentTo() + a.getAmount());
 
 						dailyAccountStateNewCreditor.setNewState(dailyAccountStateNewCreditor.getPreviousState()
 								+ dailyAccountStateNewCreditor.getPaymentTo() - dailyAccountStateNewCreditor.getPaymentFrom());
@@ -317,7 +317,7 @@ public class StatementAnalysisService {
 				} else {
 
 
-					dailyAccountBalanceCreditor.setPaymentTo(dailyAccountBalanceCreditor.getPaymentTo() + a.getSum());
+					dailyAccountBalanceCreditor.setPaymentTo(dailyAccountBalanceCreditor.getPaymentTo() + a.getAmount());
 					dailyAccountBalanceCreditor.setNewState(dailyAccountBalanceCreditor.getPreviousState() + dailyAccountBalanceCreditor.getPaymentTo()
 							- dailyAccountBalanceCreditor.getPaymentFrom());
 
@@ -348,7 +348,7 @@ public class StatementAnalysisService {
 		    s.setItemNumber(xml.getItemNumber());
 		    s.setDateOfReceipt(xml.getDateOfReceipt());
 		    s.setDebtorAccount(accountRepository.findOneByAccountnum(xml.getDebtorAccountXML()));
-		    s.setAccountCreditor(xml.getAccountCreditor());
+		    s.setAccountCreditor(accountRepository.findOneByAccountnum(xml.getAccountCreditorXML()));
 		    s.setDebtorOrderer(xml.getDebtorOrderer());
 		    s.setModelApproval(xml.getModelApproval());
 		    s.setModelOfIndebtedness(xml.getModelOfIndebtedness());
