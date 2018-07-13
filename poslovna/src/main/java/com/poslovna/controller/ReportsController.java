@@ -21,7 +21,7 @@ import com.poslovna.repository.AccountRepository;
 import com.poslovna.repository.BankRepository;
 import com.poslovna.service.ReportsService;
 
-import net.sf.jasperreports.engine.JRException;
+
 
 
 
@@ -54,7 +54,7 @@ public class ReportsController {
 	
 	@RequestMapping(value = "/getAccounts/{id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_PDF_VALUE)
-	public ResponseEntity<InputStreamResource> getAccountsReport(@PathVariable Long id) throws IOException, JRException {
+	public ResponseEntity<InputStreamResource> getAccountsReport(@PathVariable Long id) throws IOException{
 		
 		
 		
