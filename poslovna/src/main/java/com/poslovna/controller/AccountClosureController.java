@@ -45,9 +45,10 @@ public class AccountClosureController {
 		AccountClosure closure=new AccountClosure();
 		closure.setClosuredate(closureDTO.getClosuredate());
 		closure.setAccountfrom(accountf);
+		System.out.println("aaaaaaaaa " + closureDTO.getAccountto());
 		closure.setAccountto(accountnew);
 		
-		accountClosureService.addClosure(closure);
+		accountClosureService.addClosure(closure,closureDTO);
 		
 		
 		return closure;	

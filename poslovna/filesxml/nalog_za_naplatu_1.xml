@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <statementAnalysis>
     <type>Nalog za naplatu</type>
-    <debtorOrderer>Nike</debtorOrderer>
+    <debtorOrderer>Afirma</debtorOrderer>
     <purposeOfPayment>Isplata zarade 03/2018</purposeOfPayment>
     <creditorReceiver>Marko Juric, radnik</creditorReceiver>
     <dateOfReceipt>2018-05-19</dateOfReceipt>
     <dateCurrency>2018-05-19</dateCurrency>
     <amount>15000</amount>
-    <debtorAccountXML>778-1111111111111-92</debtorAccountXML>
+    <debtorAccountXML>778-4444444444444-92</debtorAccountXML>
     <modelOfIndebtedness>97</modelOfIndebtedness>
     <referenceNumberOfIndebtedness>BOP</referenceNumberOfIndebtedness>
-    <accountCreditorXML>778-3333333333333-92</accountCreditorXML>
+    <accountCreditorXML>778-1111111111111-92</accountCreditorXML>
     <paymentTypeXML>1</paymentTypeXML>
     <paymentCurrencyXML>DIN</paymentCurrencyXML>
     <modelApproval>97</modelApproval>
