@@ -15,5 +15,6 @@
     <status></status>
     <paymentTypeXML>1</paymentTypeXML>
     <paymentCurrencyXML>DIN</paymentCurrencyXML>
-    <cityXML>Novi Sad</cityXML> 
+    <cityXML>Novi Sad</cityXML>
+    <code>140</code> 
 </statementAnalysis>
