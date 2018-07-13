@@ -81,14 +81,26 @@ public class StatementAnalysisController {
 		//cuvanje naloga za prenos
 		@GetMapping("/save/xml-transfer/{fileName}")
 		public StatementAnalysis saveAnalyticsTransfer(@PathVariable String fileName) throws JAXBException, ParseException {
-			File file = new File("nalozi\\" + fileName + ".xml");
+			File file = new File("filesxml\\" + fileName + ".xml");
 			StatementAnalysis analytic = saService.saveStatementAnalysisTransfer(file);
 			saService.generateBankTransfer(analytic);
 			return analytic;
 		}
 	
 	
-	
+		// nalog za uplatu ucitaj
+		@GetMapping("/xml-order/{fileName}")
+		public StatementAnalysis loadXMLOrder(@PathVariable String fileName) throws JAXBException {
+			File file = new File("filesxml\\" + fileName + ".xml");
+			return saService.getStatementAnalysisOrder(file);
+		}
+		
+		
+		@GetMapping("/save/xml-order/{fileName}")
+		public StatementAnalysis saveAnalyticsOrder(@PathVariable String fileName) throws JAXBException, ParseException {
+			File file = new File("filesxml\\" + fileName + ".xml");
+			return saService.saveStatementAnalysisOrder(file);
+		}
 	
 	
 	
