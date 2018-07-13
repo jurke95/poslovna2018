@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statementAnalysis>
+    <type>Nalog za prenos</type>
+    <debtorOrderer>Cfirma</debtorOrderer>
+    <purposeOfPayment>Prenos 05/2018</purposeOfPayment>
+    <creditorReceiver>Damjan Nicic, radnik</creditorReceiver>
+    <dateOfReceipt>2018-05-10</dateOfReceipt>
+    <dateCurrency>2018-05-10</dateCurrency>
+    <amount>11300</amount>
+    <debtorAccountXML>778-6666666666666-92</debtorAccountXML>
+    <modelOfIndebtedness>97</modelOfIndebtedness>
+    <referenceNumberOfIndebtedness>BOP</referenceNumberOfIndebtedness>
+    <accountCreditorXML>778-3333333333333-92</accountCreditorXML>
+    <paymentTypeXML>1</paymentTypeXML>
+    <paymentCurrencyXML>DIN</paymentCurrencyXML>
+    <modelApproval>97</modelApproval>
+    <referenceNumberCreditor>BOP</referenceNumberCreditor>
+    <typeOfError>1</typeOfError>
+    <status></status>
+    <code>248</code>
+    <urgent>false</urgent>
+</statementAnalysis>
