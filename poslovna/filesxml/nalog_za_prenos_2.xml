@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <statementAnalysis>
-    <type>Nalog za naplatu</type>
+    <type>Nalog za prenos</type>
     <debtorOrderer>Bfirma</debtorOrderer>
-    <purposeOfPayment>Isplata zarade 03/2018</purposeOfPayment>
+    <purposeOfPayment>Prenos 06/2018</purposeOfPayment>
     <creditorReceiver>Dragan Dulic, radnik</creditorReceiver>
-    <dateOfReceipt>2018-04-15</dateOfReceipt>
-    <dateCurrency>2018-04-15</dateCurrency>
-    <amount>12700</amount>
-    <debtorAccountXML>778-5555555555555-92</debtorAccountXML>
+    <dateOfReceipt>2018-06-11</dateOfReceipt>
+    <dateCurrency>2018-06-11</dateCurrency>
+    <amount>16000</amount>
+    <debtorAccountXML>778-8888888888888-92</debtorAccountXML>
     <modelOfIndebtedness>97</modelOfIndebtedness>
     <referenceNumberOfIndebtedness>BOP</referenceNumberOfIndebtedness>
     <accountCreditorXML>778-2222222222222-92</accountCreditorXML>
@@ -18,4 +18,5 @@
     <typeOfError>1</typeOfError>
     <status></status>
     <code>248</code>
+    <urgent>true</urgent>
 </statementAnalysis>
