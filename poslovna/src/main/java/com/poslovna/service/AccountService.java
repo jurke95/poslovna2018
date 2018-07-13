@@ -141,7 +141,7 @@ public class AccountService {
 		List<Account> retList = new ArrayList<>();
 		for(Account acc : listAccoount) {
 			
-			if(acc.getBank().getId()==id && acc.getIndividual()!=null) {
+			if(acc.getBank().getId()==id && acc.getIndividual()!=null && acc.getIsValid()) {
 				
 				retList.add(acc);
 			}
@@ -155,7 +155,7 @@ public class AccountService {
 		List<Account> listAccoount = accountRepository.findAll();
 		List<Account> retList = new ArrayList<>();
 		for(Account acc : listAccoount) {
-			if(acc.getBank().getId()==id && acc.getLegalEntity()!=null) {
+			if(acc.getBank().getId()==id && acc.getLegalEntity()!=null && acc.getIsValid()) {
 				retList.add(acc);
 			}
 		}
@@ -203,6 +203,10 @@ public class AccountService {
 		
 		
 	}
+		
+	
+	
+	
 	
 	
 }
