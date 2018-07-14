@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <statementAnalysis>
     <type>Nalog za naplatu</type>
-    <debtorOrderer>Bfirma</debtorOrderer>
+    <debtorOrderer>Marko Juric</debtorOrderer>
     <purposeOfPayment>Isplata zarade 03/2018</purposeOfPayment>
     <creditorReceiver>Dragan Dulic, radnik</creditorReceiver>
     <dateOfReceipt>2018-04-15</dateOfReceipt>
     <dateCurrency>2018-04-15</dateCurrency>
     <amount>12700</amount>
-    <debtorAccountXML>778-5555555555555-92</debtorAccountXML>
+    <debtorAccountXML>778-1111111111111-92</debtorAccountXML>
     <modelOfIndebtedness>97</modelOfIndebtedness>
     <referenceNumberOfIndebtedness>BOP</referenceNumberOfIndebtedness>
     <accountCreditorXML>778-2222222222222-92</accountCreditorXML>

@@ -50,7 +50,7 @@ INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_
 INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-8888888888888-92',0,'2018-01-21','2','2','2');
 INSERT INTO `poslovna`.`account` (`accountnum`, `is_valid`,`openingdate`, `bank_id`, `currency_id`, `legal_entity_id`) VALUES ('778-9999999999999-92',1,'2018-07-02','2','3','3');
 
-INSERT INTO `poslovna`.`daily_account_balance` (`date`, `new_state`,`payment_from`, `payment_to`, `previous_state`, `bankaccount_id`) VALUES ('2018-05-18', 50000.0, 0.0, 0.0, 50000.00, '2');
+INSERT INTO `poslovna`.`daily_account_balance` (`date`, `new_state`,`payment_from`, `payment_to`, `previous_state`, `bankaccount_id`) VALUES ('2018-01-01', 50000.0, 0.0, 0.0, 50000.00, '2');
 
 
 INSERT INTO `poslovna`.`activity` (`code`, `name`) VALUES ('1A3','Uzgoj zitarica');
