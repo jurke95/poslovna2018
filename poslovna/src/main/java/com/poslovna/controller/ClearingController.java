@@ -38,6 +38,8 @@ public class ClearingController {
 	@PostMapping("/generateClearing")
 	public ResponseEntity<Void> generateClearing( @RequestBody Bank bank) throws JAXBException{
 		
+		Long id=(long) 2;
+		generateClearingXml( clearingService.getClearing(id));
 		List<Clearing> clearings = clearingService.getClearings();
 		for(Clearing clearing : clearings) {
 			if(!clearing.isDone() && (clearing.getBankfrom().getId() == bank.getId() || clearing.getBankto().getId() == bank.getId())) {
@@ -55,6 +57,7 @@ public class ClearingController {
 		Marshaller m = jaxbContext.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		File file =new File("filesxml//clearing//clearing" +clearing.getId()+".xml");
+		System.out.println(file);
 		try {
 			file.createNewFile();
 		} catch (IOException e) {

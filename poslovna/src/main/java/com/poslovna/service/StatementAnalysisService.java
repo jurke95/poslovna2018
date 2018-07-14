@@ -379,7 +379,7 @@ public class StatementAnalysisService {
 					saRepository.save(a);
 
 				}
-
+				 generateBankTransfer(a);
 			}
 
 			return a;
@@ -591,7 +591,7 @@ public class StatementAnalysisService {
 					saRepository.save(a);
 
 				}
-
+              generateBankTransfer(a);
 			}
 
 			return a;
@@ -599,20 +599,24 @@ public class StatementAnalysisService {
 		}
 	
 		public void generateBankTransfer(StatementAnalysis a ) throws JAXBException {
+			System.out.println("USAO U BANK TRANSFERR");
 			Bank fromBank = a.getAccountCreditor().getBank();
 			Bank toBank = a.getDebtorAccount().getBank();
-			
+		/*	
 			if(fromBank.getId() == toBank.getId() ) {
 				return;
 			}
-			
+			*/
 			if(a.getAmount() < maxSum && !a.getUrgent()) {
 				Clearing clearing = clearingService.getLastClearingForBank(fromBank.getId(), toBank.getId());
 				if(clearing == null) {
+					
 					List<StatementAnalysis> analytics = new ArrayList<>();
 					analytics.add(a);
 					clearing = new Clearing(fromBank,toBank,a.getPaymentCurrency(), a.getDateCurrency(), analytics, a.getAmount());
+					
 				}else {
+					
 					List<StatementAnalysis> analytics = clearing.getPayments();
 					analytics.add(a);
 					double sumAll = clearing.getSumall();
@@ -622,6 +626,7 @@ public class StatementAnalysisService {
 					clearingService.removeClearing(clearing.getId());
 				}
 				clearingService.saveClearing(clearing);
+				
 				
 			}else {
 				Rtgs newRtgs = new Rtgs(fromBank, toBank, a);
@@ -636,6 +641,7 @@ public class StatementAnalysisService {
 			Marshaller m = jaxbContext.createMarshaller();
 	        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			File file =new File("filesxml//rtgs//rtgs" +rtgs.getId()+".xml");
+			System.out.println("RTGSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
 			try {
 				file.createNewFile();
 			} catch (IOException e) {

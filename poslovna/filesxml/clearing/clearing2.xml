@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<clearing>
+    <currency>DIN</currency>
+    <currencyDate>2018-05-10</currencyDate>
+    <id>2</id>
+    <payments>
+        <payment>
+            <id>1</id>
+        </payment>
+    </payments>
+    <sumAll>11300.0</sumAll>
+</clearing>

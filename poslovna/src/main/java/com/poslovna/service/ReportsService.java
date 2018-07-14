@@ -27,7 +27,7 @@ public class ReportsService {
 	
 	
 	@Autowired
-	private static StatementAnalysisRepository statementAnalysisRepository;
+	private StatementAnalysisRepository statementAnalysisRepository;
 	
 	
 public static ByteArrayInputStream accountsReport(List<Account> accounts, String title) {
@@ -167,13 +167,13 @@ public static ByteArrayInputStream accountsReport(List<Account> accounts, String
 
 
 
-public static ByteArrayInputStream clientReport(String accountnum, String datefrom,String dateto) {
+public static ByteArrayInputStream clientReport(List<StatementAnalysis>base, String accountnum, String datefrom,String dateto) {
 	
 
     Document document = new Document();
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     
-    List<StatementAnalysis>base= statementAnalysisRepository.findAll();
+  
     
     
 
@@ -198,7 +198,7 @@ public static ByteArrayInputStream clientReport(String accountnum, String datefr
         hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(hcell);
       
-        hcell = new PdfPCell(new Phrase("Prethodno stanje", headFont));
+        hcell = new PdfPCell(new Phrase("Svrha", headFont));
         hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(hcell);
         
@@ -207,11 +207,11 @@ public static ByteArrayInputStream clientReport(String accountnum, String datefr
         hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(hcell);
         
-        hcell = new PdfPCell(new Phrase("Novo stanje", headFont));
+        hcell = new PdfPCell(new Phrase("Trenutno stanje", headFont));
         hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(hcell);
         
-        hcell = new PdfPCell(new Phrase("Svrha", headFont));
+        hcell = new PdfPCell(new Phrase("Primalac", headFont));
         hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
         table.addCell(hcell);
         
@@ -220,11 +220,14 @@ public static ByteArrayInputStream clientReport(String accountnum, String datefr
         PdfPCell cell;
         
         for (StatementAnalysis statement :base) {
-
-        	
+        
+        	if(statement.getDailyAccountBalance()!=null){
         	if(statement.getDailyAccountBalance().getBankaccount().getAccountnum().equals(accountnum)) {
-        		
-        		cell = new PdfPCell(new Phrase(statement.getDailyAccountBalance().getBankaccount().getIndividual().getName()));
+        		if(statement.getDailyAccountBalance().getBankaccount().getLegalEntity()!=null){
+        		cell = new PdfPCell(new Phrase(statement.getDailyAccountBalance().getBankaccount().getLegalEntity().getName()));
+        		}else{
+        			cell = new PdfPCell(new Phrase(statement.getDailyAccountBalance().getBankaccount().getIndividual().getName()));
+        		}
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
@@ -236,14 +239,15 @@ public static ByteArrayInputStream clientReport(String accountnum, String datefr
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
                 table.addCell(cell);
         	
+                cell = new PdfPCell(new Phrase(statement.getPurposeOfPayment()));
+                cell.setPaddingLeft(5);
+                cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                table.addCell(cell);
         	
         	
 
-            cell = new PdfPCell(new Phrase(statement.getDailyAccountBalance().getPreviousState().toString()));
-            cell.setPaddingLeft(5);
-            cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
-            cell.setHorizontalAlignment(Element.ALIGN_LEFT);
-            table.addCell(cell);
+          
             
             cell = new PdfPCell(new Phrase(statement.getAmount().toString()));
             cell.setPaddingLeft(5);
@@ -261,13 +265,15 @@ public static ByteArrayInputStream clientReport(String accountnum, String datefr
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
             
-            cell = new PdfPCell(new Phrase(statement.getPurposeOfPayment()));
+            cell = new PdfPCell(new Phrase(statement.getCreditorReceiver()));
             cell.setPaddingLeft(5);
             cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
             cell.setHorizontalAlignment(Element.ALIGN_LEFT);
             table.addCell(cell);
+           
             
         	}
+        }
         }
         
     
@@ -293,7 +299,7 @@ public static ByteArrayInputStream clientReport(String accountnum, String datefr
 
 
 
-
+ 
 
 
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rtgs>
+    <accountcreditor>778-2222222222222-92</accountcreditor>
+    <creditor>Dragan Dulic, radnik</creditor>
+    <currencydate>2018-06-11</currencydate>
+    <dateofreceipt>2018-06-11</dateofreceipt>
+    <debtor>Bfirma</debtor>
+    <debtoraccount>778-8888888888888-92</debtoraccount>
+    <id>1</id>
+    <modelapproval>97</modelapproval>
+    <modelassigments>97</modelassigments>
+    <paymentcurrency>DIN</paymentcurrency>
+    <purposeofpayment>Prenos 06/2018</purposeofpayment>
+    <referencenumberassigments>BOP</referencenumberassigments>
+    <referencenumbercreditor>BOP</referencenumbercreditor>
+</rtgs>

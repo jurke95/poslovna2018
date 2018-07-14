@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statementAnalysis>
+    <type>Nalog za isplatu</type>
+    <debtorOrderer>Bfirma</debtorOrderer>
+    <purposeOfPayment>Prodaja robe</purposeOfPayment>
+    <creditorReceiver>Damjan Nicic, blagajnik</creditorReceiver>
+    <dateOfReceipt>2018-06-15</dateOfReceipt>
+    <dateCurrency>2018-06-17</dateCurrency>
+    <amount>4300</amount>
+    <debtorAccountXML>778-5555555555555-92</debtorAccountXML>
+    <modelOfIndebtedness>97</modelOfIndebtedness>
+    <referenceNumberOfIndebtedness>BOP</referenceNumberOfIndebtedness>
+    <urgent>false</urgent>
+    <typeOfError>1</typeOfError>
+    <status></status>
+    <paymentTypeXML>1</paymentTypeXML>
+    <paymentCurrencyXML>DIN</paymentCurrencyXML>
+    <cityXML>Novi Sad</cityXML>
+    <code>140</code> 
+</statementAnalysis>
