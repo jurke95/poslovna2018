@@ -1,5 +1,7 @@
 package com.poslovna.controller;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,10 +47,14 @@ public class AccountClosureController {
 		AccountClosure closure=new AccountClosure();
 		closure.setClosuredate(closureDTO.getClosuredate());
 		closure.setAccountfrom(accountf);
-		System.out.println("aaaaaaaaa " + closureDTO.getAccountto());
 		closure.setAccountto(accountnew);
 		
-		accountClosureService.addClosure(closure,closureDTO);
+		try {
+			accountClosureService.addClosure(closure,closureDTO);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		return closure;	
